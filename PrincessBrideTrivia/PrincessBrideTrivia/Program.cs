@@ -30,7 +30,6 @@ namespace PrincessBrideTrivia
                 }
             }
             // Outputs the percentage of answers that are correct
-            Console.WriteLine("The Number");
             Console.WriteLine($"You got {GetPercentCorrect(numberCorrect, questions.Length)} correct");
         }
         // Uses an equation to get the percentage of the correct # of answers
