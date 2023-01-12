@@ -30,12 +30,13 @@ namespace PrincessBrideTrivia
                 }
             }
             // Outputs the percentage of answers that are correct
-            Console.WriteLine("You got " + GetPercentCorrect(numberCorrect, questions.Length) + " correct");
+            Console.WriteLine("The Number");
+            Console.WriteLine($"You got {GetPercentCorrect(numberCorrect, questions.Length)} correct");
         }
         // Uses an equation to get the percentage of the correct # of answers
-        public static string GetPercentCorrect(int numberCorrectAnswers, int numberOfQuestions)
+        public static string GetPercentCorrect(double numberCorrectAnswers, double numberOfQuestions)
         {
-            return (numberCorrectAnswers / numberOfQuestions * 100) + "%";
+            return (int)((numberCorrectAnswers / numberOfQuestions) * 100) + "%";
         }
 
         // Asks the question to a user
