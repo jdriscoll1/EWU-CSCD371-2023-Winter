@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 
@@ -12,9 +13,10 @@ namespace Logger.Tests
         public void Error_WithNullLogger_ThrowsException()
         {
             // Arrange
+            ArgumentNullException ex = null;
 
             // Act
-            //BaseLoggerMixins.Error(null, "");
+            BaseLoggerMixins.Error(null, "");
 
             // Assert
         }
@@ -26,7 +28,7 @@ namespace Logger.Tests
             var logger = new TestLogger();
 
             // Act
-            //logger.Error("Message {0}", 42);
+            logger.Error("Message {0}", 42);
 
             // Assert
             Assert.AreEqual(1, logger.LoggedMessages.Count);
@@ -43,6 +45,11 @@ namespace Logger.Tests
         public override void Log(LogLevel logLevel, string message)
         {
             LoggedMessages.Add((logLevel, message));
+        }
+
+        internal void Error(string msg, int id)
+        {
+            Log(LogLevel.Error, String.Format(msg, id)); 
         }
     }
 }
