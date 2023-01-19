@@ -13,14 +13,39 @@ namespace Logger.Tests
         public void Error_WithNullLogger_ThrowsException()
         {
             // Arrange
-            ArgumentNullException ex = null;
+            ArgumentNullException exception = null!;
 
             // Act
-            BaseLoggerMixins.Error(null, "");
-
+            try
+            {
+                BaseLoggerMixins.Error(null, "");
+            }
+            catch (ArgumentNullException ex) {
+                throw new ArgumentNullException(); 
+            }
             // Assert
-        }
+            Assert.IsNotNull(exception);
+        }/*
+        public void Model_GivenNull_ThrowsException()
+        {
+            // Assert
+            Vehicle vehicle = new();
+            ArgumentNullException expectedException = null!;
 
+            // Act
+            try
+            {
+                vehicle.Model = null;
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.AreEqual("Model", ex.ParamName);
+            }
+
+            Assert.IsNotNull(expectedException);
+
+        }
+        */
         [TestMethod]
         public void Error_WithData_LogsMessage()
         {
