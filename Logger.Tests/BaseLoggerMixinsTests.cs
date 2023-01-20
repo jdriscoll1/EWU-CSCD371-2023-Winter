@@ -25,27 +25,9 @@ namespace Logger.Tests
             }
             // Assert
             Assert.IsNotNull(exception);
-        }/*
-        public void Model_GivenNull_ThrowsException()
-        {
-            // Assert
-            Vehicle vehicle = new();
-            ArgumentNullException expectedException = null!;
-
-            // Act
-            try
-            {
-                vehicle.Model = null;
-            }
-            catch (ArgumentNullException ex)
-            {
-                Assert.AreEqual("Model", ex.ParamName);
-            }
-
-            Assert.IsNotNull(expectedException);
-
         }
-        */
+
+
         [TestMethod]
         public void Error_WithData_LogsMessage()
         {
