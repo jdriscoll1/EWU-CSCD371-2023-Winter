@@ -3,7 +3,7 @@
     public class LogFactory
     {
         private string _FactoryName { get; set; }
-        private string _FilePath { get; set; }
+        private string _FilePath { get; set; } = null; 
 
         public string getFactoryName() {
             return _FactoryName;
@@ -22,6 +22,10 @@
 
         public BaseLogger CreateLogger(string className)
         {
+        
+            if (_FilePath is null) {
+                return null; 
+            }
 
             if (className == "FileLogger") {
                 return new FileLogger(_FilePath);

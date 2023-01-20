@@ -33,6 +33,7 @@ namespace Logger.Tests
         {
             // Arrange
             LogFactory factory = new LogFactory();
+            factory.ConfigureFileLogger(filePath);
 
             // Act
             FileLogger fileLogger = (FileLogger)factory.CreateLogger("FileLogger");
@@ -55,6 +56,22 @@ namespace Logger.Tests
             // Assert
             Assert.AreEqual(filePath, factory.GetFileLoggerPath()); 
             
+
+        }
+
+        [TestMethod]
+        public void TestCreateLogger_SucceedIfReturnsNullWithEmptyFilePath()
+        {
+            // Arrange
+            LogFactory factory = new LogFactory();
+
+
+            // Act
+            FileLogger fileLogger = (FileLogger)factory.CreateLogger("FileLogger");
+
+            // Assert
+            Assert.IsNull(factory.GetFileLoggerPath());
+            Assert.IsNull(fileLogger);
 
         }
     }

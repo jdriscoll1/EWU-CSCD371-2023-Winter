@@ -1,4 +1,6 @@
-﻿namespace Logger
+﻿using System.Runtime.InteropServices;
+
+namespace Logger
 {
     public enum LogLevel
     {
