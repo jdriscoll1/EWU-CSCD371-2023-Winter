@@ -12,6 +12,7 @@ namespace Logger
            
         public FileLogger(string filepath) {
             _Filepath = filepath;
+            SetClassName("FileLogger");
            
         }
 

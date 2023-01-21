@@ -2,15 +2,9 @@
 {
     public class LogFactory
     {
-        private string _FactoryName { get; set; }
+      
         private string _FilePath { get; set; } = null; 
 
-        public string getFactoryName() {
-            return _FactoryName;
-        }
-        public void setFactoryName(string factoryName) {
-            _FactoryName = factoryName;
-        }
 
         public void ConfigureFileLogger(string fileLogger) {
             _FilePath = fileLogger; 

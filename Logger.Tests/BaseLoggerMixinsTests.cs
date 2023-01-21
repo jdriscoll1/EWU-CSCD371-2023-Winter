@@ -1,13 +1,20 @@
 ﻿
+using Microsoft.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Threading;
 
 namespace Logger.Tests
 {
     [TestClass]
     public class BaseLoggerMixinsTests
     {
+
+        string filePath = "C:\\Users\\Jordan\\test-folder\\School\\Classes\\371.2\\log.txt";
+
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Error_WithNullLogger_ThrowsException()
@@ -18,10 +25,10 @@ namespace Logger.Tests
             // Act
             try
             {
-                BaseLoggerMixins.Error(null, "");
+                BaseLoggerMixins.Error(null, 0);
             }
             catch (ArgumentNullException ex) {
-                throw new ArgumentNullException(); 
+                throw ex; 
             }
             // Assert
             Assert.IsNotNull(exception);
@@ -41,6 +48,35 @@ namespace Logger.Tests
             Assert.AreEqual(1, logger.LoggedMessages.Count);
             Assert.AreEqual(LogLevel.Error, logger.LoggedMessages[0].LogLevel);
             Assert.AreEqual("Message 42", logger.LoggedMessages[0].Message);
+        }
+
+        [TestMethod]
+        public void Error_WithData_UseMixins_ReturnTrueIfLogsErrorIntoFile()
+        {
+            // Arrange     
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+
+            FileStream fs = File.Create(filePath);
+
+            fs.Close();
+
+            string message = "Message {0}";
+
+            int error = 42;
+
+
+            // Act
+            BaseLoggerMixins.Error(message, error);
+
+            // Assert
+            string expected = $"{DateTime.Now} BaseLoggerMixins Error: Message 42"; 
+            string actual = new StreamReader(filePath).ReadLine();
+            Assert.AreEqual(expected, actual); 
+
+
         }
 
     }

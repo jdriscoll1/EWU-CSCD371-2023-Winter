@@ -13,19 +13,8 @@ namespace Logger.Tests
         string filePath = "C:\\Users\\Jordan\\test-folder\\School\\Classes\\371.2\\log.txt";
 
 
-        // Check to see if it has a name 
-        [TestMethod]
-        public void SetClassName()
-        {
-            // Arrange
-            LogFactory factory = new LogFactory();
-
-            // Act
-            factory.setFactoryName("FactoryName"); 
-
-            // Assert
-            Assert.AreEqual("FactoryName", factory.getFactoryName());
-        }
+      
+       
 
 
         [TestMethod]
