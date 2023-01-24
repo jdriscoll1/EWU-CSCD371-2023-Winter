@@ -6,7 +6,7 @@
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <Nullable>enable</Nullable>
     <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
-    <LangVersion>11.0</LangVersion>
+    <LangVersion>preview</LangVersion>
 
   </PropertyGroup>
 
