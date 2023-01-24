@@ -4,7 +4,7 @@ namespace Logger
 {
     public abstract class BaseLogger
     {
-        private string _ClassName { get; set;  } = null;
+        private string _ClassName { get; set; } = null!;
 
         public void SetClassName(string className) {
             _ClassName = className; 

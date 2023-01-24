@@ -12,7 +12,7 @@ namespace Logger
            
         public FileLogger(string filepath) {
             _Filepath = filepath;
-            SetClassName("FileLogger");
+            SetClassName(nameof(FileLogger));
            
         }
 
@@ -23,13 +23,16 @@ namespace Logger
             string previousClass = previousMethod.ReflectedType.Name;
            
             
-            string fullMessage = $" {DateTime.Now} {previousClass} {logLevel.ToString()}: {message}".Trim();
+            string fullMessage = $" {DateTime.Now} {previousClass} {logLevel}: {message}".Trim();
             
-            using (StreamWriter writer = new StreamWriter(_Filepath))
+            using (StreamWriter writer = File.AppendText(_Filepath))
             {
                 writer.WriteLine(fullMessage);
+                writer.Flush();
+                writer.Close();
                 
             }
+            
           
         }
     }

@@ -12,7 +12,7 @@ namespace Logger.Tests
     public class BaseLoggerMixinsTests
     {
 
-        string filePath = "C:\\Users\\Jordan\\test-folder\\School\\Classes\\371.2\\log.txt";
+        string filePath = "C:\\Users\\Jordan\\test-folder\\School\\Classes\\371.2\\";
 
 
         [TestMethod]
@@ -25,7 +25,7 @@ namespace Logger.Tests
             // Act
             try
             {
-                BaseLoggerMixins.Error(null, 0);
+                BaseLoggerMixins.Error(null!, null!);
             }
             catch (ArgumentNullException ex) {
                 throw ex; 
@@ -50,31 +50,150 @@ namespace Logger.Tests
             Assert.AreEqual("Message 42", logger.LoggedMessages[0].Message);
         }
 
+
+
+
+
+
         [TestMethod]
         public void Error_WithData_UseMixins_ReturnTrueIfLogsErrorIntoFile()
         {
+            string fileName = String.Format("{0}\\Error_WithData_UseMixins_ReturnTrueIfLogsErrorIntoFile", filePath);
+         
             // Arrange     
-            if (File.Exists(filePath))
+            if (File.Exists(fileName))
             {
-                File.Delete(filePath);
+                File.Delete(fileName);
             }
 
-            FileStream fs = File.Create(filePath);
+            FileStream fs = File.Create(fileName);
 
             fs.Close();
 
+            LogFactory logFactory = new LogFactory();
+            logFactory.ConfigureFileLogger(fileName);
+            FileLogger fileLogger = (FileLogger)logFactory.CreateLogger("FileLogger"); 
+
             string message = "Message {0}";
 
-            int error = 42;
-
+            string error = "42";
+           
 
             // Act
-            BaseLoggerMixins.Error(message, error);
+            fileLogger.Error(message, error);
 
             // Assert
             string expected = $"{DateTime.Now} BaseLoggerMixins Error: Message 42"; 
-            string actual = new StreamReader(filePath).ReadLine();
+            string actual = new StreamReader(fileName).ReadLine()!;
             Assert.AreEqual(expected, actual); 
+
+
+        }
+
+
+
+        [TestMethod]
+        public void Warning_WithData_UseMixins_ReturnTrueIfLogsWarningIntoFile()
+        {
+            string fileName = String.Format("{0}\\Warning_WithData_UseMixins_ReturnTrueIfLogsWarningIntoFile", filePath);
+
+            // Arrange     
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
+            }
+
+            FileStream fs = File.Create(fileName);
+
+            fs.Close();
+
+            LogFactory logFactory = new LogFactory();
+            logFactory.ConfigureFileLogger(fileName);
+            FileLogger fileLogger = (FileLogger)logFactory.CreateLogger("FileLogger");
+
+            string message = "Message {0}";
+
+            string warning = "42";
+
+
+            // Act
+            fileLogger.Warning(message, warning);
+
+            // Assert
+            string expected = $"{DateTime.Now} BaseLoggerMixins Warning: Message 42";
+            string actual = new StreamReader(fileName).ReadLine()!;
+            Assert.AreEqual(expected, actual);
+
+
+        }
+
+        [TestMethod]
+        public void Information_WithData_UseMixins_ReturnTrueIfLogsInformationIntoFile()
+        {
+            string fileName = String.Format("{0}\\Information_WithData_UseMixins_ReturnTrueIfLogsInformationIntoFile", filePath);
+
+            // Arrange     
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
+            }
+
+            FileStream fs = File.Create(fileName);
+
+            fs.Close();
+
+            LogFactory logFactory = new LogFactory();
+            logFactory.ConfigureFileLogger(fileName);
+            FileLogger fileLogger = (FileLogger)logFactory.CreateLogger("FileLogger");
+
+            string message = "Message {0}";
+
+            string information = "42";
+
+
+            // Act
+            fileLogger.Information(message, information);
+
+            // Assert
+            string expected = $"{DateTime.Now} BaseLoggerMixins Information: Message 42";
+            string actual = new StreamReader(fileName).ReadLine()!;
+            Assert.AreEqual(expected, actual);
+
+
+        }
+
+
+        [TestMethod]
+        public void Debug_WithData_UseMixins_ReturnTrueIfLogsDebugIntoFile()
+        {
+            string fileName = String.Format("{0}\\Debug_WithData_UseMixins_ReturnTrueIfLogsDebugIntoFile", filePath);
+
+            // Arrange     
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
+            }
+
+            FileStream fs = File.Create(fileName);
+
+            fs.Close();
+
+            LogFactory logFactory = new LogFactory();
+            logFactory.ConfigureFileLogger(fileName);
+            FileLogger fileLogger = (FileLogger)logFactory.CreateLogger("FileLogger");
+
+            string message = "Message {0}";
+
+            string debug = "42";
+
+
+            // Act
+            fileLogger.Debug(message, debug);
+
+            // Assert
+            string expected = $"{DateTime.Now} BaseLoggerMixins Debug: Message 42";
+            string actual = new StreamReader(fileName).ReadLine()!;
+            Assert.AreEqual(expected, actual);
 
 
         }

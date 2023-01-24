@@ -2,8 +2,8 @@
 {
     public class LogFactory
     {
-      
-        private string _FilePath { get; set; } = null; 
+
+        private string _FilePath { get; set; } = null!; 
 
 
         public void ConfigureFileLogger(string fileLogger) {
@@ -18,13 +18,13 @@
         {
         
             if (_FilePath is null) {
-                return null; 
+                return null!; 
             }
 
             if (className == "FileLogger") {
                 return new FileLogger(_FilePath);
             }
-            return null; 
+            return null!; 
         }
 
     }

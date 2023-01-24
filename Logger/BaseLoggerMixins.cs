@@ -6,27 +6,62 @@ namespace Logger
     {
 
        
-        public static void Error(string msg, int id)
+        public static void Error(this BaseLogger logger, string msg, params string[] args)
         {
             if (msg is null) { 
-                throw new ArgumentNullException("msg");
+                throw new ArgumentNullException(msg);
             }
-            string fileName = "C:\\Users\\Jordan\\test-folder\\School\\Classes\\371.2\\log.txt"; 
-            FileLogger logger = new FileLogger(fileName); 
-            String errorMessage = String.Format(msg, id);
+            if (logger is null) {
+                throw new ArgumentNullException(logger!.ToString());
+            }
+            String errorMessage = string.Format(null, msg, args);
             logger.Log(LogLevel.Error, errorMessage);
             
         }
 
-        /*
-        public static class StringHelper
+        public static void Warning(this BaseLogger logger, string msg, params string[] args)
         {
-            public static string AppendEllipses(this string input)
+            if (msg is null)
             {
-                return $"{input}...";
+                throw new ArgumentNullException(msg);
             }
+            if (logger is null)
+            {
+                throw new ArgumentNullException(logger!.ToString());
+            }
+            String warningMessage = string.Format(null, msg, args);
+            logger.Log(LogLevel.Warning, warningMessage);
 
         }
-        */
+
+        public static void Information(this BaseLogger logger, string msg, params string[] args)
+        {
+            if (msg is null)
+            {
+                throw new ArgumentNullException(msg);
+            }
+            if (logger is null)
+            {
+                throw new ArgumentNullException(logger!.ToString());
+            }
+            String informationMessage = string.Format(null, msg, args);
+            logger.Log(LogLevel.Information, informationMessage);
+
+        }
+
+        public static void Debug(this BaseLogger logger, string msg, params string[] args)
+        {
+            if (msg is null)
+            {
+                throw new ArgumentNullException(msg);
+            }
+            if (logger is null)
+            {
+                throw new ArgumentNullException(logger!.ToString());
+            }
+            String debugMessage = string.Format(null, msg, args);
+            logger.Log(LogLevel.Debug, debugMessage);
+
+        }
     }
 }

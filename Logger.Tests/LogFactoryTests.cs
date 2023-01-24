@@ -13,10 +13,6 @@ namespace Logger.Tests
         string filePath = "C:\\Users\\Jordan\\test-folder\\School\\Classes\\371.2\\log.txt";
 
 
-      
-       
-
-
         [TestMethod]
         public void TestFileLoggerCreation_TrueIfNotNull()
         {
