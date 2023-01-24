@@ -10,7 +10,7 @@ namespace Logger.Tests
     public class LogFactoryTests
     {
 
-        string filePath = "C:\\Users\\Jordan\\test-folder\\School\\Classes\\371.2\\log.txt";
+        string filePath = "./";
 
 
         [TestMethod]

@@ -10,7 +10,7 @@ namespace Logger.Tests
     public class FileLoggerTests
     {
 
-        string filePath = "C:\\Users\\Jordan\\test-folder\\School\\Classes\\371.2\\"; 
+        string filePath = "./"; 
       
         [TestMethod]
         public void TestLogLevel_ReturnTrueIfMessageOutputsProperly()

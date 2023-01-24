@@ -12,7 +12,7 @@ namespace Logger.Tests
     public class BaseLoggerMixinsTests
     {
 
-        string filePath = "C:\\Users\\Jordan\\test-folder\\School\\Classes\\371.2\\";
+        string filePath = "./";
 
 
         [TestMethod]
