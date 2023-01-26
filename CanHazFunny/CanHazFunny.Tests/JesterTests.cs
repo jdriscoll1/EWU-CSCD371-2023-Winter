@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace CanHazFunny.Tests
 {
@@ -6,10 +7,10 @@ namespace CanHazFunny.Tests
     public class JesterTests
     {
         [TestMethod]
-        public void Instantiate_Jester_ReturnTrueIfProperlyCreated()
+        public void InstantiateJesterReturnTrueIfProperlyCreated()
         {
             // Arrange
-            Jester jester = new Jester(new JokeOutput(), new JokeService());
+            Jester jester = new(new JokeOutput(), new JokeService());
 
             // Assert
             Assert.IsInstanceOfType(jester, typeof(Jester));   
@@ -20,7 +21,7 @@ namespace CanHazFunny.Tests
         }
 
         [TestMethod]
-        public void TestTellJoke_ReturnTrueIfStringReturned()
+        public void TestTellJokeReturnTrueIfStringReturned()
         {
             // Arrange
             Jester jester = new Jester(new JokeOutput(), new JokeService());
@@ -33,20 +34,36 @@ namespace CanHazFunny.Tests
         }
 
         [TestMethod]
-        public void TestContainsChuckNorris_DoesNotReturnChuckNorris()
+        public void TestContainsChuckNorrisReturnTrueIfContainsChecksProperly()
         {
             // Arrange
-            Jester jester = new Jester(new JokeOutput(), new JokeService());
-
-            // Act
-            bool joke1 = jester.ContainsChuckNorris("There is no chin behind Chuck Norris' beard. There is only another fist.\n");
-            bool joke2 = !jester.ContainsChuckNorris("Yo momma's so poor she opend a Gmail account just so she could eat the spam \n");
-            bool joke3 = jester.ContainsChuckNorris("chUCk nORRiS");
+            bool joke1 = Jester.ContainsChuckNorris("There is no chin behind Chuck Norris' beard. There is only another fist.\n");
+            bool joke2 = !Jester.ContainsChuckNorris("Yo momma's so poor she opend a Gmail account just so she could eat the spam \n");
+            bool joke3 = Jester.ContainsChuckNorris("chUCk nORRiS");
 
             // Assert
             Assert.IsTrue(joke1);
             Assert.IsTrue(joke2);
-            Assert.IsTrue(joke3); 
+            Assert.IsTrue(joke3);
+            
+
+        }
+        [TestMethod]
+        public void TestJesterMethodReturnTrueIfThrowsNullException() {
+            // Arrange
+            ArgumentNullException exception = null!; 
+
+            // Act
+            try
+            {
+                Jester jester = new(null!, null!);
+            }
+            catch (ArgumentNullException ex) {
+                exception = ex; 
+            }
+
+            // Assert
+            Assert.IsNotNull(exception); 
 
         }
     }

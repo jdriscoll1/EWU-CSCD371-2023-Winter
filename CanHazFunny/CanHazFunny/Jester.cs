@@ -13,18 +13,12 @@ namespace CanHazFunny
         private JokeOutput _JokeOutput;
         private JokeService _JokeService; 
         public Jester(JokeOutput jokeOutput, JokeService jokeService) {
-            if (jokeOutput is null) {
-                throw new ArgumentNullException("Joke Output"); 
-            }
-            if (jokeService is null) {
-                throw new ArgumentNullException("Joke Service"); 
-            }
-            _JokeOutput = jokeOutput;
-            _JokeService = jokeService;
+            _JokeOutput = jokeOutput ?? throw new ArgumentNullException(nameof(jokeOutput));
+            _JokeService = jokeService ?? throw new ArgumentNullException(nameof(jokeService));
         
         }
 
-        public bool ContainsChuckNorris(string joke) {
+        public static bool ContainsChuckNorris(string joke) {
             return joke?.IndexOf("Chuck Norris", StringComparison.OrdinalIgnoreCase) > -1; 
         }
         public string GetJoke() {
