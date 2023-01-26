@@ -32,8 +32,9 @@ namespace CanHazFunny
             do
             {
                 joke = _JokeService.GetJoke();
-            } while (!ContainsChuckNorris(joke)); 
-            return _JokeService.GetJoke(); 
+
+            } while (ContainsChuckNorris(joke)); 
+            return joke; 
         }
 
         public void TellJoke() {
