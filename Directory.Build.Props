@@ -1,0 +1,10 @@
+
+
+<Project>
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <using>Logger</using>    
+  </PropertyGroup>
+
+</Project>
