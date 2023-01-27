@@ -8,9 +8,13 @@ namespace Logger
 {
     public class FileLogger : BaseLogger
     {
+        
+        private string _CreationClass { get; set; } = null!; 
+
         string _Filepath { get; set; }
            
-        public FileLogger(string filepath) {
+        public FileLogger(string creationClass, string filepath) {
+            _CreationClass = creationClass;
             _Filepath = filepath;
             SetClassName(nameof(FileLogger));
            
@@ -18,12 +22,8 @@ namespace Logger
 
         public override void Log(LogLevel logLevel, string message)
         {
-            // Gets calling method
-            System.Reflection.MethodBase previousMethod = new StackTrace().GetFrame(1).GetMethod();
-            string previousClass = previousMethod.ReflectedType.Name;
-           
             
-            string fullMessage = $" {DateTime.Now} {previousClass} {logLevel}: {message}".Trim();
+            string fullMessage = $" {DateTime.Now} {_CreationClass} {logLevel}: {message}".Trim();
             
             using (StreamWriter writer = File.AppendText(_Filepath))
             {

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 
+
 namespace Logger.Tests
 {
     [TestClass]
@@ -69,23 +70,30 @@ namespace Logger.Tests
             FileStream fs = File.Create(fileName);
 
             fs.Close();
-
-            LogFactory logFactory = new LogFactory();
+            
+            LogFactory logFactory = new();
             logFactory.ConfigureFileLogger(fileName);
-            FileLogger fileLogger = (FileLogger)logFactory.CreateLogger("FileLogger"); 
-
+            
+            FileLogger fileLogger = (FileLogger)logFactory.CreateLogger(nameof(BaseLoggerMixinsTests), "FileLogger");
+            
             string message = "Message {0}";
 
             string error = "42";
-           
+            
 
-            // Act
-            fileLogger.Error(message, error);
+             // Act
+             fileLogger.Error(message, error);
+            
 
-            // Assert
-            string expected = $"{DateTime.Now} BaseLoggerMixins Error: Message 42"; 
-            string actual = new StreamReader(fileName).ReadLine()!;
-            Assert.AreEqual(expected, actual); 
+             // Assert
+             string expected = $"{DateTime.Now} BaseLoggerMixinsTests Error: Message 42";
+            StreamReader sr = new StreamReader(fileName); 
+
+             string actual = sr.ReadLine()!;
+             sr.Close(); 
+             Assert.AreEqual(expected, actual);
+      
+             File.Delete(fileName);
 
 
         }
@@ -109,7 +117,7 @@ namespace Logger.Tests
 
             LogFactory logFactory = new LogFactory();
             logFactory.ConfigureFileLogger(fileName);
-            FileLogger fileLogger = (FileLogger)logFactory.CreateLogger("FileLogger");
+            FileLogger fileLogger = (FileLogger)logFactory.CreateLogger(nameof(BaseLoggerMixinsTests), "FileLogger");
 
             string message = "Message {0}";
 
@@ -120,9 +128,13 @@ namespace Logger.Tests
             fileLogger.Warning(message, warning);
 
             // Assert
-            string expected = $"{DateTime.Now} BaseLoggerMixins Warning: Message 42";
-            string actual = new StreamReader(fileName).ReadLine()!;
+            string expected = $"{DateTime.Now} BaseLoggerMixinsTests Warning: Message 42";
+            StreamReader sr = new StreamReader(fileName);
+            string actual = sr.ReadLine()!;
+            sr.Close();
             Assert.AreEqual(expected, actual);
+
+            File.Delete(fileName);
 
 
         }
@@ -144,7 +156,7 @@ namespace Logger.Tests
 
             LogFactory logFactory = new LogFactory();
             logFactory.ConfigureFileLogger(fileName);
-            FileLogger fileLogger = (FileLogger)logFactory.CreateLogger("FileLogger");
+            FileLogger fileLogger = (FileLogger)logFactory.CreateLogger(nameof(BaseLoggerMixinsTests), "FileLogger");
 
             string message = "Message {0}";
 
@@ -155,9 +167,13 @@ namespace Logger.Tests
             fileLogger.Information(message, information);
 
             // Assert
-            string expected = $"{DateTime.Now} BaseLoggerMixins Information: Message 42";
-            string actual = new StreamReader(fileName).ReadLine()!;
+            string expected = $"{DateTime.Now} BaseLoggerMixinsTests Information: Message 42";
+            StreamReader sr = new StreamReader(fileName);
+            string actual = sr.ReadLine()!;
+            sr.Close();
             Assert.AreEqual(expected, actual);
+
+            File.Delete(fileName);
 
 
         }
@@ -180,7 +196,7 @@ namespace Logger.Tests
 
             LogFactory logFactory = new LogFactory();
             logFactory.ConfigureFileLogger(fileName);
-            FileLogger fileLogger = (FileLogger)logFactory.CreateLogger("FileLogger");
+            FileLogger fileLogger = (FileLogger)logFactory.CreateLogger(nameof(BaseLoggerMixinsTests), "FileLogger");
 
             string message = "Message {0}";
 
@@ -191,12 +207,17 @@ namespace Logger.Tests
             fileLogger.Debug(message, debug);
 
             // Assert
-            string expected = $"{DateTime.Now} BaseLoggerMixins Debug: Message 42";
-            string actual = new StreamReader(fileName).ReadLine()!;
+            string expected = $"{DateTime.Now} BaseLoggerMixinsTests Debug: Message 42";
+            StreamReader sr = new StreamReader(fileName);
+            string actual = sr.ReadLine()!;
+            sr.Close();
             Assert.AreEqual(expected, actual);
+
+            File.Delete(fileName);
 
 
         }
+
 
     }
 

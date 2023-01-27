@@ -27,7 +27,7 @@ namespace Logger.Tests
             fs.Close();
 
 
-            FileLogger fileLogger = new FileLogger(fileName);
+            FileLogger fileLogger = new FileLogger(nameof(FileLoggerTests), fileName);
             string message = "This is a test warning, please remain calm"; 
 
 
@@ -37,8 +37,9 @@ namespace Logger.Tests
             string expected = $"{DateTime.Now} FileLoggerTests Warning: {message}";
 
             // Open the file 
-            string actual = new StreamReader(fileName).ReadLine()!;
-
+            StreamReader streamReader = new StreamReader(fileName);
+            string actual = streamReader.ReadLine()!;
+            streamReader.Close(); 
             // Assert
             Assert.AreEqual(expected, actual);
         }
@@ -58,7 +59,7 @@ namespace Logger.Tests
             fs.Close();
 
 
-            FileLogger fileLogger = new FileLogger(fileName);
+            FileLogger fileLogger = new FileLogger(nameof(FileLoggerTests), fileName);
             
             string message1 = "This is a test warning, please remain calm";
             
@@ -75,12 +76,17 @@ namespace Logger.Tests
             // Assert
             StreamReader streamReader = new StreamReader(fileName);
             string actual1 = streamReader.ReadLine()!;
-            string actual2 = streamReader.ReadLine()!; 
+            string actual2 = streamReader.ReadLine()!;
+
+        ;
+ 
 
 
             // Assert
             Assert.AreEqual(expected1, actual1);
             Assert.AreEqual(expected2, actual2);
+            streamReader.Close();
+            File.Delete(fileName);
 
 
         }
@@ -98,7 +104,7 @@ namespace Logger.Tests
             // Act
             logFactory.ConfigureFileLogger(filePath);
 
-            FileLogger fileLogger = (FileLogger)logFactory.CreateLogger(className);
+            FileLogger fileLogger = (FileLogger)logFactory.CreateLogger(nameof(FileLoggerTests), className);
 
 
             // Assert

@@ -2,7 +2,6 @@
 {
     public class LogFactory
     {
-
         private string _FilePath { get; set; } = null!; 
 
 
@@ -14,7 +13,7 @@
             return _FilePath; 
         }
 
-        public BaseLogger CreateLogger(string className)
+        public BaseLogger CreateLogger(string creationClass, string className)
         {
         
             if (_FilePath is null) {
@@ -22,7 +21,7 @@
             }
 
             if (className == "FileLogger") {
-                return new FileLogger(_FilePath);
+                return new FileLogger(creationClass, _FilePath);
             }
             return null!; 
         }

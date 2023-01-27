@@ -21,7 +21,7 @@ namespace Logger.Tests
             factory.ConfigureFileLogger(filePath);
 
             // Act
-            FileLogger fileLogger = (FileLogger)factory.CreateLogger("FileLogger");
+            FileLogger fileLogger = (FileLogger)factory.CreateLogger(nameof(FileLogger), "FileLogger");
 
             // Assert
             Assert.IsNotNull(fileLogger);
@@ -32,7 +32,7 @@ namespace Logger.Tests
         {
             // Arrange
             LogFactory factory = new LogFactory();
-            factory.CreateLogger("FileLogger");
+            factory.CreateLogger(nameof(LogFactoryTests), "FileLogger");
 
             // Act
             factory.ConfigureFileLogger(filePath);
@@ -52,7 +52,7 @@ namespace Logger.Tests
 
 
             // Act
-            FileLogger fileLogger = (FileLogger)factory.CreateLogger("FileLogger");
+            FileLogger fileLogger = (FileLogger)factory.CreateLogger(nameof(LogFactoryTests), "FileLogger");
 
             // Assert
             Assert.IsNull(factory.GetFileLoggerPath());
