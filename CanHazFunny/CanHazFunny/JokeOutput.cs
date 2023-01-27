@@ -8,7 +8,7 @@ namespace CanHazFunny
 {
     public class JokeOutput : IJokeOutput
     {
-        public void output(string joke) {
+        public void Output(string joke) {
 
             Console.WriteLine(joke);
         }

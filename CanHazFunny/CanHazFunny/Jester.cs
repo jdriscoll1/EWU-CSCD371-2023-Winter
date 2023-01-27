@@ -6,12 +6,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+[assembly: CLSCompliant(true)]
 namespace CanHazFunny
 {
     public class Jester
     {
-        private JokeOutput _JokeOutput;
-        private JokeService _JokeService; 
+        private readonly JokeOutput _JokeOutput;
+        private readonly JokeService _JokeService; 
         public Jester(JokeOutput jokeOutput, JokeService jokeService) {
             _JokeOutput = jokeOutput ?? throw new ArgumentNullException(nameof(jokeOutput));
             _JokeService = jokeService ?? throw new ArgumentNullException(nameof(jokeService));
@@ -32,7 +33,7 @@ namespace CanHazFunny
         }
 
         public void TellJoke() {
-            _JokeOutput.output(GetJoke()); 
+            _JokeOutput.Output(GetJoke()); 
         }
     }
 }
