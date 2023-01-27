@@ -15,14 +15,21 @@
 
         public BaseLogger CreateLogger(string creationClass, string className)
         {
-        
+
+
+            if (className == "ConsoleLogger")
+            {
+                return new ConsoleLogger(creationClass);
+            }
             if (_FilePath is null) {
                 return null!; 
             }
 
-            if (className == "FileLogger") {
+            if (className == "FileLogger")
+            {
                 return new FileLogger(creationClass, _FilePath);
             }
+            
             return null!; 
         }
 
