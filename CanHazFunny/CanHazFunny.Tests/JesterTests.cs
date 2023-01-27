@@ -1,6 +1,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.IO;
 
+[assembly: CLSCompliant(true)]
 namespace CanHazFunny.Tests
 {
     [TestClass]
@@ -66,5 +68,22 @@ namespace CanHazFunny.Tests
             Assert.IsNotNull(exception); 
 
         }
+
+        [TestMethod]
+        public void TestCLIOutput()
+        {
+            // Arrange
+            Jester jester = new (new JokeOutput(), new JokeService());
+            using StringWriter stringWriter = new();
+            Console.SetOut(stringWriter);
+
+            // Act
+            jester.TellJoke();
+
+            // Assert
+            Assert.IsNotNull(stringWriter.ToString());
+
+        }
     }
+
 }
