@@ -9,6 +9,7 @@ namespace CanHazFunny
 {
     public class JokeObject
     {
+        // Lowercase in order to be convertible to json
         public string joke { get; set; } = ""; 
 
     }
