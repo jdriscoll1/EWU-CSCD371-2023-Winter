@@ -14,6 +14,7 @@ namespace Logger
             if (logger is null) {
                 throw new ArgumentNullException(logger!.ToString());
             }
+            Console.WriteLine(msg);
             String errorMessage = string.Format(null, msg, args);
             logger.Log(LogLevel.Error, errorMessage);
             
