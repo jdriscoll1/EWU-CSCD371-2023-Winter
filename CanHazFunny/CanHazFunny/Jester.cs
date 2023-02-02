@@ -16,7 +16,7 @@ namespace CanHazFunny
             }
             set 
             {
-                ArgumentNullException.ThrowIfNull(nameof(value));
+                ArgumentNullException.ThrowIfNull(value);
                 _JokeService = value; 
 
             }
@@ -32,7 +32,7 @@ namespace CanHazFunny
             }
             set
             {
-                ArgumentNullException.ThrowIfNull(nameof(value));
+                ArgumentNullException.ThrowIfNull(value);
                 _JokeOutput = value;
 
             }

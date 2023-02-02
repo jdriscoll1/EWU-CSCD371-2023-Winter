@@ -31,29 +31,19 @@ namespace CanHazFunny.Tests
 
             // Act
             string joke = jester.GetJoke();
+
             // Assert
             Assert.IsNotNull(joke);
             
         }
 
         [TestMethod]
-        public void TestJesterMethodReturnTrueIfThrowsNullException() {
-            // Arrange
-            ArgumentNullException exception = null!; 
+        [ExpectedException(typeof(System.ArgumentNullException))]
+        public void TestJesterDependencyNullabilityReturnTrueIfNullExceptionThrown()
+        {
+            new Jester(null!, null!);
 
-            // Act
-            try
-            {
-                Jester jester = new(null!, null!);
-                jester.JokeOutput = null!;
-
-            }
-            catch (ArgumentNullException ex) {
-                exception = ex; 
-            }
-
-            // Assert
-            Assert.IsNotNull(exception); 
+            
 
         }
 
@@ -86,6 +76,7 @@ namespace CanHazFunny.Tests
             Jester jester = new(new JokeOutput(), jokeServiceMock.Object);
 
             using StringWriter stringWriter = new();
+
             Console.SetOut(stringWriter);
 
             // Act
