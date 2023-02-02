@@ -48,19 +48,26 @@ namespace CanHazFunny.Tests
         }
 
         [TestMethod]
-        public void TestCLIOutput()
-        {
+        public void TestIfJokeWritesToCLI() {
             // Arrange
-            Jester jester = new (new JokeOutput(), new JokeService());
+            Mock<IJokeService> jokeServiceMock = new();
+
+            JokeService jokeService = new();
+
+            jokeServiceMock.SetupSequence(jokeService => jokeService.GetJoke()).Returns("Funny Joke");
+
+            Jester jester = new(new JokeOutput(), jokeServiceMock.Object);
+
             using StringWriter stringWriter = new();
+
             Console.SetOut(stringWriter);
 
             // Act
             jester.TellJoke();
 
             // Assert
-            Assert.IsNotNull(stringWriter);
-            Assert.IsNotNull(stringWriter.ToString());
+            Assert.AreEqual<string>("Funny Joke", stringWriter.ToString().Trim());
+
 
         }
         [TestMethod]
@@ -83,7 +90,7 @@ namespace CanHazFunny.Tests
             jester.TellJoke();
 
             // Assert
-            Assert.AreEqual("Funny Joke", stringWriter.ToString().Trim());
+            Assert.AreEqual<string>("Funny Joke", stringWriter.ToString().Trim());
 
         }
 
