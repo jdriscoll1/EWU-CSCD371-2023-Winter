@@ -3,9 +3,6 @@ using System.Net.Http;
 using System.Text.Json;
 using static System.Net.Mime.MediaTypeNames;
 
-#pragma warning disable CA1014
-// The code that's violating the rule is on this line.
-#pragma warning restore CA1014
 namespace CanHazFunny; 
 
 public class JokeService : IJokeService
