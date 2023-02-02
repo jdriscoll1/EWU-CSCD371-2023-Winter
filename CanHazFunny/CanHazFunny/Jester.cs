@@ -1,38 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+
 
 namespace CanHazFunny
 {
     public class Jester
     {
-        private readonly JokeOutput _JokeOutput;
-        private readonly JokeService _JokeService; 
-        public Jester(JokeOutput jokeOutput, JokeService jokeService) {
-            _JokeOutput = jokeOutput ?? throw new ArgumentNullException(nameof(jokeOutput));
-            _JokeService = jokeService ?? throw new ArgumentNullException(nameof(jokeService));
+        private IJokeOutput? _JokeOutput;
+        private IJokeService? _JokeService;
+
+        public IJokeService JokeService {
+            
+            get 
+            {
+                return _JokeService!; 
+            }
+            set 
+            {
+                ArgumentNullException.ThrowIfNull(nameof(value));
+                _JokeService = value; 
+
+            }
+
+        }
+
+        public IJokeOutput JokeOutput
+        {
+
+            get
+            {
+                return _JokeOutput!;
+            }
+            set
+            {
+                ArgumentNullException.ThrowIfNull(nameof(value));
+                _JokeOutput = value;
+
+            }
+
+        }
+        public Jester(IJokeOutput jokeOutput, IJokeService jokeService) {
+            JokeOutput = jokeOutput; 
+            JokeService = jokeService;
         
         }
 
-        public static bool ContainsChuckNorris(string joke) {
-            return joke?.IndexOf("Chuck Norris", StringComparison.OrdinalIgnoreCase) > -1; 
-        }
-        public string GetJoke() {
-            string joke;
-            do
-            {
-                joke = _JokeService.GetJoke();
 
-            } while (ContainsChuckNorris(joke)); 
-            return joke; 
+        // What does Get Joke Do? It returns a joke
+        // What does Tell Joke Do? It filters through Chuck Jokes & Sends it to output 
+        public string GetJoke() {
+            return JokeService.GetJoke();
         }
 
         public void TellJoke() {
-            _JokeOutput.Output(GetJoke()); 
+            string joke; 
+            do
+            {
+                joke = GetJoke(); 
+
+            } while (joke.Contains("Chuck Norris", System.StringComparison.CurrentCulture));
+            JokeOutput.Output(joke); 
         }
     }
 }
