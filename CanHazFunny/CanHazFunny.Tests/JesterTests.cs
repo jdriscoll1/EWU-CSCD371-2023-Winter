@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
+using Moq; 
 
 [assembly: CLSCompliant(true)]
 namespace CanHazFunny.Tests
@@ -36,21 +37,6 @@ namespace CanHazFunny.Tests
         }
 
         [TestMethod]
-        public void TestContainsChuckNorrisReturnTrueIfContainsChecksProperly()
-        {
-            // Arrange
-            bool joke1 = Jester.ContainsChuckNorris("There is no chin behind Chuck Norris' beard. There is only another fist.\n");
-            bool joke2 = !Jester.ContainsChuckNorris("Yo momma's so poor she opend a Gmail account just so she could eat the spam \n");
-            bool joke3 = Jester.ContainsChuckNorris("chUCk nORRiS");
-
-            // Assert
-            Assert.IsTrue(joke1);
-            Assert.IsTrue(joke2);
-            Assert.IsTrue(joke3);
-            
-
-        }
-        [TestMethod]
         public void TestJesterMethodReturnTrueIfThrowsNullException() {
             // Arrange
             ArgumentNullException exception = null!; 
@@ -59,6 +45,8 @@ namespace CanHazFunny.Tests
             try
             {
                 Jester jester = new(null!, null!);
+                jester.JokeOutput = null!;
+
             }
             catch (ArgumentNullException ex) {
                 exception = ex; 
@@ -81,9 +69,36 @@ namespace CanHazFunny.Tests
             jester.TellJoke();
 
             // Assert
+            Assert.IsNotNull(stringWriter);
             Assert.IsNotNull(stringWriter.ToString());
 
         }
+        [TestMethod]
+        public void TestIfJokeReturnsChuckNorris()
+        {
+            // Arrange
+            Mock<IJokeService> jokeServiceMock = new();
+
+            JokeService jokeService = new();
+
+            jokeServiceMock.SetupSequence(jokeService => jokeService.GetJoke()).Returns("Chuck Norris Joke").Returns("Funny Joke");
+
+            Jester jester = new(new JokeOutput(), jokeServiceMock.Object);
+
+            using StringWriter stringWriter = new();
+            Console.SetOut(stringWriter);
+
+            // Act
+            jester.TellJoke();
+
+            // Assert
+            Assert.AreEqual("Funny Joke", stringWriter.ToString().Trim());
+
+        }
+
+        
+        
     }
+
 
 }
