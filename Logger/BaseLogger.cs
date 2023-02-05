@@ -5,7 +5,7 @@
 public abstract class BaseLogger
 {
     public string LogSource { get; }
-    public BaseLogger(string logSource) => LogSource = string.IsNullOrWhiteSpace(logSource)
+    protected BaseLogger(string logSource) => LogSource = string.IsNullOrWhiteSpace(logSource)
             ? throw new ArgumentException($"'{nameof(logSource)}' cannot be null or whitespace.", nameof(logSource))
             : logSource;
 

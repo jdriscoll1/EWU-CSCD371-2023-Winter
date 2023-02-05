@@ -1,4 +1,5 @@
-﻿namespace Logger;
+﻿[assembly: CLSCompliant(true)]
+namespace Logger;
 
 public class BaseLoggerConfiguration : ILoggerConfiguration
 {

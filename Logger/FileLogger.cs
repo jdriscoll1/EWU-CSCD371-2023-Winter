@@ -8,7 +8,7 @@ public class FileLogger : BaseLogger, ILogger
 
     public FileLogger(string logSource, string filePath) : base(logSource) => File = new FileInfo(filePath);
 
-    public FileLogger(FileLoggerConfiguration configuration) : this(configuration.LogSource, configuration.FilePath) {}
+    public FileLogger(FileLoggerConfiguration configuration) : this((configuration ?? throw new ArgumentNullException(nameof(configuration))).LogSource, configuration.FilePath) {}
 
     static ILogger ILogger.CreateLogger(in ILoggerConfiguration logggerConfiguration) => 
         logggerConfiguration is FileLoggerConfiguration configuration

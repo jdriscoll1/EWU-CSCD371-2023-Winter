@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace Logger.Tests
 {
     [TestClass]
-    internal class StorageTests
+    public class StorageTests
     {
         // Test Add and Get 
         [TestMethod]
-        public void ValidateRecordStorage_ValidateAddAndGet()
+        public void ValidateRecordStorageValidateAddAndGet()
         {
             // Arrange
             Storage recordStorage = new();
@@ -32,7 +32,7 @@ namespace Logger.Tests
 
     
         [TestMethod]
-        public void ValidateRecordStorageRemove_ReturnTrueIfContainsIsTrue()
+        public void ValidateRecordStorageRemoveReturnTrueIfContainsIsTrue()
         {
             Storage recordStorage = new();
             FullName author = new("Poe", "Edgar", "Alan");
@@ -46,7 +46,7 @@ namespace Logger.Tests
         }
 
         [TestMethod]
-        public void ValidateRecordStorageRemove_ReturnTrueIfContainsIsFalse()
+        public void ValidateRecordStorageRemoveReturnTrueIfContainsIsFalse()
         {
             Storage recordStorage = new();
             FullName author = new("Poe", "Edgar", "Alan");

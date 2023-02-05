@@ -3,11 +3,13 @@
 public class TestLogger : BaseLogger, ILogger
 {
     public TestLogger(string logSource) : base(logSource) { }
-    
+
+#pragma warning disable CA1002 // Do not expose generic lists
     public List<(LogLevel LogLevel, string Message)> LoggedMessages { get; } = new List<(LogLevel, string)>();
+#pragma warning restore CA1002 // Do not expose generic lists
 
     public static ILogger CreateLogger(in TestLoggerConfiguration configuration) => 
-        new TestLogger(configuration.LogSource);
+        new TestLogger((configuration ?? throw new ArgumentNullException(nameof(configuration))).LogSource);
 
     static ILogger ILogger.CreateLogger(in ILoggerConfiguration configuration) => 
         configuration is TestLoggerConfiguration testLoggerConfiguration

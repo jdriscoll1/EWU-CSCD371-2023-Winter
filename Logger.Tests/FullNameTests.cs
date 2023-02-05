@@ -12,21 +12,21 @@ namespace Logger.Tests
     {
 
         [TestMethod]
-        public void InstantiateFullNameObject_ReturnTrueIfNotNull()
+        public void InstantiateFullNameObjectReturnTrueIfNotNull()
         {
             Assert.IsNotNull(new FullName("Billy", "Joe", null));
 
         }
 
         [TestMethod]
-        public void InstantiateFullNameObjectWithMiddleName_ReturnTrueIfNotNull()
+        public void InstantiateFullNameObjectWithMiddleNameReturnTrueIfNotNull()
         {
             Assert.IsNotNull(new FullName("Billy", "Joe", "Bob"));
 
         }
 
         [TestMethod]
-        public void FullNameComparesByValue_AssertTrueIfObjectsAreEqual()
+        public void FullNameComparesByValueAssertTrueIfObjectsAreEqual()
         {
             // This test displays that the two objects are value equals because 
             // we are creating two different objects with different addresses
@@ -38,7 +38,7 @@ namespace Logger.Tests
         }
 
         [TestMethod]
-        public void FullNameComparesByValue_AssertFalseIfObjectsAreNotEqual()
+        public void FullNameComparesByValueAssertFalseIfObjectsAreNotEqual()
         {
             FullName name1 = new("Johnny", "", "J");
             FullName name2 = new("Johnny", "S", "J");
