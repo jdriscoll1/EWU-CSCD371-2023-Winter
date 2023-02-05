@@ -75,6 +75,13 @@ namespace Logger.Tests
 
         }
 
+        [TestMethod]
+        public void StudentInheritsFromPerson() {
+            FullName studentName = new("SquarePants", "Spongebob", null);
+            Student student = new(studentName, "Boating License", "Boating School");
+            Assert.IsInstanceOfType(student, typeof(Person));    
+        }
+
 
     }
 }

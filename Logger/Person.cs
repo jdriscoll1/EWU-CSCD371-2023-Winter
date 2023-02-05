@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Logger
 {
-    public record Employee(FullName FullName, string PositionTitle, string Company) : Person(FullName)
+    public record Person(FullName FullName) : Entity
     {
+        public override string Name { get => FullName.ToString(); }
     }
 }
