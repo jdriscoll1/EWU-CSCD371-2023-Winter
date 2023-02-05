@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Logger
 {
-    public record Book(string title, string author, string isbn) : IEntity
+    public record Book(string Title, string Author, string ISBN) : IEntity
     {
         public Guid Id { init; get; }
         private string? _Name; 
@@ -19,7 +19,7 @@ namespace Logger
             }
         }
     }
-    public record Student(FullName fullName, long studentID) : IEntity {
+    public record Student(FullName FullName, long StudentID) {
         public Guid Id { init; get; }
         private string? _Name;
         public string Name
