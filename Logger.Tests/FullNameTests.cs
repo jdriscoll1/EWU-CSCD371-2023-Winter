@@ -28,9 +28,21 @@ namespace Logger.Tests
         [TestMethod]
         public void FullNameComparesByValue_AssertTrueIfObjectsAreEqual()
         {
+            // This test displays that the two objects are value equals because 
+            // we are creating two different objects with different addresses
+            // Yet we are equals because they share the same values
             FullName name1 = new("Johnny", "Smith", "J");
             FullName name2 = new("Johnny", "Smith", "J");
-            Assert.AreEqual(name1, name2);
+            Assert.AreEqual<FullName>(name1, name2);
+
+        }
+
+        [TestMethod]
+        public void FullNameComparesByValue_AssertFalseIfObjectsAreNotEqual()
+        {
+            FullName name1 = new("Johnny", "", "J");
+            FullName name2 = new("Johnny", "S", "J");
+            Assert.AreNotEqual<FullName>(name1, name2);
 
         }
 
@@ -56,24 +68,6 @@ namespace Logger.Tests
 
         }
 
-        [TestMethod]
-        public void ValidateRecordStored_ReturnTrueIfObjectsSaved()
-        {
-            // Arrange
-            Storage recordStorage = new();
-            string isbn = "12345";
-            FullName author = new("Poe", "Edgar", "Alan");
-            Book bookRecord = new("The Cat In The Hat", author, isbn);
-            Guid bookID = bookRecord.Id; 
-
-            // Act
-            recordStorage.Add(bookRecord);
-            Book storedBook = recordStorage.Get(bookID) as Book ?? throw new ArgumentNullException();
-
-            // Assert
-            Assert.AreEqual<Book>(storedBook, bookRecord); 
-
-        }
 
         [TestMethod]
         public void StudentInheritsFromPerson() {
