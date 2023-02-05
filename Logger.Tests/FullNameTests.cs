@@ -33,5 +33,29 @@ namespace Logger.Tests
             Assert.AreEqual(name1, name2);
 
         }
+
+        [TestMethod]
+        public void InstantiateStudentRecord()
+        {
+            FullName studentName = new("Vader", "Darth", null);
+            Assert.IsNotNull(new Student(studentName, "Mechanical Engineer", "Eastern Washington University"));
+        }
+
+        [TestMethod]
+        public void InstantiateEmployeeRecord() {
+            FullName employeeName = new("Claude", "Debussy", null);
+            Assert.IsNotNull(new Employee(employeeName, "Janitor", "Walmart"));
+        
+        }
+
+        [TestMethod]
+        public void InstantiateBookRecord()
+        {
+            FullName author = new("Poe", "Edgar", "Alan");
+            Assert.IsNotNull(new Book("The Cat In The Hat", author, "12345")); 
+
+        }
+
+
     }
 }

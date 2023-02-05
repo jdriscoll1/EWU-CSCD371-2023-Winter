@@ -6,20 +6,8 @@ using System.Threading.Tasks;
 
 namespace Logger
 {
-    public record Employee(FullName fullName, long employeeID) : IEntity
+    public record Employee(FullName FullName, string PositionTitle, string Company) : Entity
     {
-        public Guid Id { init; get; }
-        private string? _Name;
-        public string Name
-        {
-            get
-            {
-                return _Name!;
-            }
-            set
-            {
-                _Name = value ?? throw new ArgumentNullException(nameof(value));
-            }
-        }
+        public override string Name { get => FullName.ToString(); }
     }
 }
