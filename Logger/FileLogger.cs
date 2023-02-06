@@ -1,6 +1,8 @@
 ﻿namespace Logger;
 
-public class FileLogger : BaseLogger, ILogger
+
+// Question: 
+public class FileLogger<T> : BaseLogger, ILogger<T>
 {
     private FileInfo File { get; }
 
@@ -10,12 +12,12 @@ public class FileLogger : BaseLogger, ILogger
 
     public FileLogger(FileLoggerConfiguration configuration) : this((configuration ?? throw new ArgumentNullException(nameof(configuration))).LogSource, configuration.FilePath) {}
 
-    static ILogger ILogger.CreateLogger(in ILoggerConfiguration logggerConfiguration) => 
+     ILogger<T> ILogger<T>.CreateLogger(in ILoggerConfiguration logggerConfiguration) => 
         logggerConfiguration is FileLoggerConfiguration configuration
             ? CreateLogger(configuration)
             : throw new ArgumentException("Invalid configuration type", nameof(logggerConfiguration));
 
-    public static FileLogger CreateLogger(FileLoggerConfiguration configuration) => new(configuration);
+    public FileLogger<T> CreateLogger(FileLoggerConfiguration configuration) => new(configuration);
 
     public override void Log(LogLevel logLevel, string message)
     {

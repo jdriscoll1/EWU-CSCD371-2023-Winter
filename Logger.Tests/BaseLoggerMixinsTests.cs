@@ -20,7 +20,7 @@ public class BaseLoggerMixinsTests
     public void ErrorWithDataLogsMessage()
     {
         // Arrange
-        var logger = new TestLogger(nameof(BaseLoggerMixinsTests));
+        var logger = new TestLogger<ILoggerConfiguration>(nameof(BaseLoggerMixinsTests));
 
         // Act
         logger.Error("Message 42");

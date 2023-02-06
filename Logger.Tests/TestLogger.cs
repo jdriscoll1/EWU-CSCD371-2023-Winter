@@ -1,6 +1,6 @@
 ﻿namespace Logger.Tests;
 
-public class TestLogger : BaseLogger, ILogger
+public class TestLogger<T> : BaseLogger, ILogger<T>
 {
     public TestLogger(string logSource) : base(logSource) { }
 
@@ -8,10 +8,10 @@ public class TestLogger : BaseLogger, ILogger
     public List<(LogLevel LogLevel, string Message)> LoggedMessages { get; } = new List<(LogLevel, string)>();
 #pragma warning restore CA1002 // Do not expose generic lists
 
-    public static ILogger CreateLogger(in TestLoggerConfiguration configuration) => 
-        new TestLogger((configuration ?? throw new ArgumentNullException(nameof(configuration))).LogSource);
+    public ILogger<T> CreateLogger(in TestLoggerConfiguration configuration) => 
+        new TestLogger<T>((configuration ?? throw new ArgumentNullException(nameof(configuration))).LogSource);
 
-    static ILogger ILogger.CreateLogger(in ILoggerConfiguration configuration) => 
+    ILogger<T> ILogger<T>.CreateLogger(in ILoggerConfiguration configuration) => 
         configuration is TestLoggerConfiguration testLoggerConfiguration
             ? CreateLogger(testLoggerConfiguration)
             : throw new ArgumentException("Invalid configuration type", nameof(configuration));

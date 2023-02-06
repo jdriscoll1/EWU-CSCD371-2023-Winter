@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Logger
 {
+    /* VALUE OR REFERENCE TYPE EXPLANIATION: */
     // Should we compare via value or reference type? Value Type.
     // Why: This should be a record struct, that is a value type comparison,
     // because it is possible that two people may share the same name
@@ -14,6 +15,7 @@ namespace Logger
     // We should be using value equal, because reference comparison would need to validate
     // that the two objects are tied to one object
 
+    /* MUTABLE OR IMMUTABLE EXPLANATION:  */
     // Should the full name structure be mutable or immuable? Immutable
     // There are three reasons that the Full Name record should be immutable
     // Firstly, whenever we change the name, we should be creating a new Full Name Object rather than changing

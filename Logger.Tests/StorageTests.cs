@@ -35,29 +35,29 @@ namespace Logger.Tests
         public void ValidateRecordStorageRemoveReturnTrueIfContainsIsTrue()
         {
             Storage recordStorage = new();
-            FullName author = new("Poe", "Edgar", "Alan");
-            Book bookRecord = new("The Cat In The Hat", author, "12345");
+            FullName employeeName = new("Poe", "Edgar", "Alan");
+            Employee employeeRecord = new(employeeName, "Software Engineer", "Intellitect");
 
             // Act 
-            recordStorage.Add(bookRecord);
+            recordStorage.Add(employeeRecord);
 
             // Assert
-            Assert.IsTrue(recordStorage.Contains(bookRecord));
+            Assert.IsTrue(recordStorage.Contains(employeeRecord));
         }
 
         [TestMethod]
         public void ValidateRecordStorageRemoveReturnTrueIfContainsIsFalse()
         {
             Storage recordStorage = new();
-            FullName author = new("Poe", "Edgar", "Alan");
-            Book bookRecord = new("The Cat In The Hat", author, "12345");
+            FullName studentName = new("Poe", "Edgar", "Alan");
+            Student studentRecord = new(studentName, "Eastern Washington University", "Theatre Arts");
 
             // Act 
-            recordStorage.Add(bookRecord);
+            recordStorage.Add(studentRecord);
 
             // Assert
-            recordStorage.Remove(bookRecord);
-            Assert.IsFalse(recordStorage.Contains(bookRecord));
+            recordStorage.Remove(studentRecord);
+            Assert.IsFalse(recordStorage.Contains(studentRecord));
 
         }
 
