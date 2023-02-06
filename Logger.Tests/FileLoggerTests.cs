@@ -6,19 +6,19 @@ namespace Logger.Tests;
 public class FileLoggerTests : FileLoggerTestsBase
 {    
     [TestMethod]
-    public void Create_GivenClassAndValidFileName_Success()
+    public void CreateGivenClassAndValidFileNameSuccess()
     {
         Assert.AreEqual(nameof(FileLoggerTests), Logger.LogSource);
         Assert.AreEqual(FilePath, Logger.FilePath);
     }
 
     [TestMethod]
-    public async Task Log_Message_FileAppended()
+    public async Task LogMessageFileAppended()
     {
         Logger.Log(LogLevel.Error, "Message1");
         Logger.Log(LogLevel.Error, "Message2");
 
-        string[] lines = await File.ReadAllLinesAsync(FilePath);
+        string[] lines = await File.ReadAllLinesAsync(FilePath).ConfigureAwait(false);
         Assert.IsTrue(lines is [..] and { Length: 2 });
         foreach (string[] line in lines.Select(line => line.Split(',', 4)))
         {

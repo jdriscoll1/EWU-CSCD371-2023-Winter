@@ -12,8 +12,6 @@ namespace Logger
         public Guid Id { get; init; }
         public string Name { get; }
 
-
-
     }
 
 }
