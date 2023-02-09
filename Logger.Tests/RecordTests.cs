@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Logger.Tests
 {
     [TestClass]
-    public class FullNameTests
+    public class RecordTests
     {
 
         [TestMethod]
@@ -34,6 +34,39 @@ namespace Logger.Tests
             FullName name1 = new("Johnny", "Smith", "J");
             FullName name2 = new("Johnny", "Smith", "J");
             Assert.AreEqual<FullName>(name1, name2);
+
+        }
+
+        [TestMethod]
+        public void StudentsAreNotEqual() {
+            FullName name = new("Aiden", "Lowe", null);
+            Student s1 = new(name, "CS", "EWU");
+            Student s2 = new(name, "CS", "EWU");
+            Assert.AreNotEqual<Student>(s1, s2); 
+
+
+        }
+
+        [TestMethod]
+        public void EmployeesAreNotEqual()
+        {
+            FullName name = new("Aiden", "Lowe", null);
+            Employee e1 = new(name, "Programmer", "Walmart");
+            Employee e2 = new(name, "Programmer", "Walmart");
+            Assert.AreNotEqual<Employee>(e1, e2);
+
+
+        }
+
+
+        [TestMethod]
+        public void BooksAreNotEqual()
+        {
+            FullName author = new("Aiden", "Lowe", null);
+            Book b1 = new("Golf Handbook", author, "12345");
+            Book b2 = new("Golf Handbook", author, "12345");
+            Assert.AreNotEqual<Book>(b1, b2);
+
 
         }
 
