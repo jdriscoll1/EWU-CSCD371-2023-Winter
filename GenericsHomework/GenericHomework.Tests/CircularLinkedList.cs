@@ -36,7 +36,10 @@ namespace GenericsHomework.Tests
         [TestMethod]
         public void AppendNodeToLinkedList()
         {
+            Assert.IsNotNull(TestLinkedList);
+            TestLinkedList.Append("Test Node");
 
+            Assert.IsTrue(TestLinkedList.Exists("Test Node"));
         }
 
         [TestMethod]
@@ -61,6 +64,20 @@ namespace GenericsHomework.Tests
         public void Cleanup()
         {
 
+
+        }
+
+        [TestMethod]
+        public void OutputLinkedList()
+        {
+
+            // Arrange
+            Assert.IsNotNull(TestLinkedList); 
+            string expected = "myString ";
+
+
+            // Assert
+            Assert.AreEqual<string>(expected, TestLinkedList.ToString()); 
 
         }
     }

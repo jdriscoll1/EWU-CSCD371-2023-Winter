@@ -30,10 +30,40 @@
             
             }
         }
+
+        public void Append(TNodeType data) {
+            Node newNode = new(data, CurrentNode.NextNode);
+            CurrentNode.SetNext(newNode);
+            Size++; 
+        
+        }
+
+        public bool Exists(TNodeType data) {
+            for (int i = 0; i < Size; i++) {
+                CurrentNode = CurrentNode.NextNode;
+                if (CurrentNode.Value!.Equals(data)) {
+                    return true; 
+                }
+            }
+            return false; 
+        }
+
+
+        public override string ToString()
+        {
+            string linkedListString = "";
+            for (int i = 0; i < Size; i++) {
+                linkedListString = linkedListString + CurrentNode.Value + " ";
+                CurrentNode = CurrentNode.NextNode; 
+            }
+            return linkedListString;
+
+        }
         public CircularLinkedList(TNodeType value) {
      
-            Node CurrentNode = new(value);
-            CurrentNode.SetNext(CurrentNode); 
+            CurrentNode = new(value);
+            CurrentNode.SetNext(CurrentNode);
+            Size = 1; 
     
         
         }
@@ -41,7 +71,7 @@
             private TNodeType? _Value { get; set; }
             private Node _NextNode { get; set; } = null!; 
 
-            private TNodeType Value {
+            public TNodeType Value {
                 get {
                     return _Value!; 
                 }
@@ -52,7 +82,7 @@
                 }
             }
 
-            private Node NextNode
+            public Node NextNode
             {
                 get
                 {
