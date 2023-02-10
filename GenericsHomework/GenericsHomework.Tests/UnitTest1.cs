@@ -6,12 +6,15 @@ namespace GenericsHomework.Tests
     [TestClass]
     public class UnitTest1
     {
-        [TestMethod]
-        public void CreateNode()
+        [TestInitialize]
+        public void InstantiateLinkedList()
         {
-
+     
+            CirclularLinkedList<string> list = new CircularLinkedList<string>("myString");
 
         }
+
+
         [TestMethod]
         public void NodeToStringTest() { 
         
@@ -23,11 +26,7 @@ namespace GenericsHomework.Tests
 
         }
 
-        [TestMethod]
-        public void InstantiateLinkedList()
-        {
-
-        }
+   
 
         [TestMethod]
         public void AppendNodeToLinkedList()
@@ -36,7 +35,7 @@ namespace GenericsHomework.Tests
         }
 
         [TestMethod]
-        public void RemoveNodeFromLinkedList()
+        public void ClearLinkedList()
         {
 
         }
@@ -51,6 +50,12 @@ namespace GenericsHomework.Tests
         public void MyTestMethod()
         {
 
+        }
+
+        [TestCleanup]
+        public void Cleanup() { 
+        
+        
         }
     }
 }
