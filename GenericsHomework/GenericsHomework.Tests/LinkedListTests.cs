@@ -1,16 +1,21 @@
 
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
+using GenericsHomework; 
+
 namespace GenericsHomework.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class LinkedListTests
     {
+        private CircularLinkedList<string>? TestLinkedList { get; set; } = null; 
+
         [TestInitialize]
         public void InstantiateLinkedList()
         {
-     
-            CirclularLinkedList<string> list = new CircularLinkedList<string>("myString");
+
+            TestLinkedList = new("myString");
 
         }
 
@@ -23,6 +28,7 @@ namespace GenericsHomework.Tests
         [TestMethod]
         public void CheckIfNextThrowsExceptionIfNull()
         {
+            Assert.IsNotNull(TestLinkedList);
 
         }
 

@@ -2,8 +2,34 @@
 {
     public class CircularLinkedList<TNodeType>
     {
-        private Node CurrentNode; 
-        private int Size; 
+        private Node? _CurrentNode { get; set; } = null!; 
+        private int _Size { get; set; }
+
+        private Node CurrentNode
+        {
+            get 
+            {
+                return _CurrentNode!; 
+            }
+
+            set 
+            {
+                ArgumentNullException.ThrowIfNull(value);
+                _CurrentNode = value;
+            }
+        }
+        public int Size
+        {
+            get {
+                return _Size; 
+            }
+
+            set {
+                ArgumentNullException.ThrowIfNull(value);
+                _Size = value; 
+            
+            }
+        }
         public CircularLinkedList(TNodeType value) {
      
             Node CurrentNode = new(value);
@@ -12,16 +38,31 @@
         
         }
         private class Node {
-            private TNodeType _Value { get;  }
-            private Node _NextNode { get; set; }
+            private TNodeType? _Value { get; set; }
+            private Node _NextNode { get; set; } = null!; 
 
             private TNodeType Value {
                 get {
-                    return _Value; 
+                    return _Value!; 
                 }
-                set { 
-
+                set {
+                    ArgumentNullException.ThrowIfNull(value);
+                    _Value = value ; 
                 
+                }
+            }
+
+            private Node NextNode
+            {
+                get
+                {
+                    return _NextNode!;
+                }
+                set
+                {
+                    ArgumentNullException.ThrowIfNull(value);
+                    _NextNode = value;
+
                 }
             }
 
