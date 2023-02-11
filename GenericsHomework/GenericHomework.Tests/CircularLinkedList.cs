@@ -19,13 +19,6 @@ namespace GenericsHomework.Tests
 
 
         [TestMethod]
-        public void NodeToStringTest()
-        {
-
-
-        }
-
-        [TestMethod]
         public void CheckIfNextThrowsExceptionIfNull()
         {
             Assert.IsNotNull(TestLinkedList);
@@ -84,10 +77,14 @@ namespace GenericsHomework.Tests
 
 
         }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AssertDuplicatesCannotBeAddedToLinkedList() {
+            Assert.IsNotNull(TestLinkedList);
+            TestLinkedList.Append("1");
+            TestLinkedList.Append("1");
 
-        public void ValidateNodesAreDestroyedOnClear_ReturnTrueIfDestructorOutputs() { 
-            
-        
+
         }
 
         [TestMethod]

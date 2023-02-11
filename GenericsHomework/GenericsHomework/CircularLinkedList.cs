@@ -32,6 +32,9 @@
         }
 
         public void Append(TNodeType data) {
+            if (Exists(data)) {
+                throw new ArgumentException($"{data} is already added in list");
+            }
             Node newNode = new(data, CurrentNode.Next);
             CurrentNode.SetNext(newNode);
             Size++; 
