@@ -64,15 +64,11 @@
         }
 
         public void Clear() {
-            // We have to go through each one and set its reference to itself
+            // We don't need to go through each individual item because the garbage collector will recognize that the first
+            // Item in the list has no reference pointing to it, and will clean it, then look at the next one. This will occur recursively 
+            // We tested to see if the Garbage Collector arrives sooner if each reference points to itself; however, the destructor
+            // showed no signs of enhancement
             CurrentNode = CurrentNode.Next; 
-            for (int i = 0; i < Size - 1; i++) {
-                Node previousNode = CurrentNode; 
-                CurrentNode = CurrentNode.Next;
-                previousNode.Destroy(); 
-                
-            
-            }
             Size = 1; 
         }
         public CircularLinkedList(TNodeType value) {
@@ -83,23 +79,22 @@
     
         
         }
+
         private class Node {
             private TNodeType? _Value { get; set; }
-            private Node _Next { get; set; } = null!; 
+            private Node? _Next { get; set; } = null!; 
 
-            public TNodeType Value {
-                get {
-                    return _Value!; 
+            public TNodeType? Value
+            {
+                get
+                {
+                    return _Value;
                 }
-                set {
-                    ArgumentNullException.ThrowIfNull(value);
-                    _Value = value ; 
-                
-                }
-            }
+                set
+                {
+                    _Value = value;
 
-            ~Node() {
-                Console.WriteLine("Destructor Was Called ");
+                }
             }
 
             public Node Next
@@ -116,7 +111,7 @@
                 }
             }
 
-            public void Destroy() {
+            public void SetReferenceToSelf() {
                 Next = this;
             }
 

@@ -5,9 +5,14 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericsHomework", "GenericsHomework\GenericsHomework.csproj", "{044A7379-5374-464A-9D33-F22DB9CE947A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericHomework.Tests", "GenericHomework.Tests\GenericHomework.Tests.csproj", "{28037E07-4487-407E-BB34-5829136CCB46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericHomework.Tests", "GenericHomework.Tests\GenericHomework.Tests.csproj", "{28037E07-4487-407E-BB34-5829136CCB46}"
 	ProjectSection(ProjectDependencies) = postProject
 		{044A7379-5374-464A-9D33-F22DB9CE947A} = {044A7379-5374-464A-9D33-F22DB9CE947A}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{3B3A7387-6702-4AD9-A067-4E06B4A98AF0}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
 Global
