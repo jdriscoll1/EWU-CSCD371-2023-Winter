@@ -1,9 +1,10 @@
-﻿using System.Drawing;
+﻿using System.Collections;
+using System.Drawing;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace GenericsHomework
 {
-    public class Node<TNodeType>
+    public class Node<TNodeType> : ICollection<TNodeType>
     {
 
         // We need to add a constructor that takes a value 
@@ -38,6 +39,23 @@ namespace GenericsHomework
                 _Next = value; 
             }
         }
+
+        public int Count
+        {
+            get {
+                int count = 1;  
+                Node<TNodeType> curr = Next; 
+                while (curr != this) {
+                    count++;
+                    curr = curr.Next; 
+                    
+                }
+                return count; 
+            }
+        
+        }
+
+        bool ICollection<TNodeType>.IsReadOnly => throw new NotImplementedException();
 
         public Node(TNodeType value)
         {
@@ -105,7 +123,96 @@ namespace GenericsHomework
 
             Next = this; 
         }
-  
 
+        public void Add(TNodeType item)
+        {
+            Append(item);
+        }
+
+        bool ICollection<TNodeType>.Contains(TNodeType item)
+        {
+            return Exists(item); 
+        }
+
+        public void CopyTo(TNodeType[] array, int arrayIndex)
+        {
+            if (array is null) {
+                throw new ArgumentNullException(nameof(array));
+            }
+            Node<TNodeType> head = this; 
+            Node<TNodeType> curr = this; 
+          
+            int index = arrayIndex; 
+            do
+            {
+                if (array.Length > index)
+                {
+                    array[index] = curr.Value!;
+                }
+                else
+                {
+                    array.Append(curr.Value);
+                }
+                curr = curr.Next; 
+                index++; 
+            } while (curr != head); 
+            
+      
+        }
+
+        public bool Remove(TNodeType item)
+        {
+
+            Node<TNodeType> curr = this;
+            Node<TNodeType> prev = this; 
+            Node<TNodeType> head = this;
+
+            do {
+                if (EqualityComparer<TNodeType>.Default.Equals(item, curr.Value)) {
+                    // Cannot remove the head object 
+                    if (curr == head) {
+                        return false; 
+                    }
+
+                    // Without a reference to curr, the garbage collector will remove it 
+                    prev.Next = curr.Next;
+                    return true; 
+            
+
+
+                }
+                prev = curr;
+                curr = curr.Next;
+
+            } while (curr != head);
+            return false; 
+        }
+
+      
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            Node<TNodeType> curr = this;
+            do
+            {
+                yield return curr.Value!;
+                curr = curr.Next;
+
+            } while (curr != this);
+
+        }
+
+
+        IEnumerator<TNodeType> IEnumerable<TNodeType>.GetEnumerator()
+        {
+            Node<TNodeType> curr = this;
+            do
+            {
+                yield return curr.Value!;
+                curr = curr.Next;
+
+            } while (curr != this);
+
+        }
     }
 }
