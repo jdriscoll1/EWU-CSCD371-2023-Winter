@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GenericHomework.Tests
+namespace GenericsHomework.Tests
 {
     
     [TestClass]
