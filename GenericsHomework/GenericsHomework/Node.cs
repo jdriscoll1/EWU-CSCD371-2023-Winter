@@ -6,14 +6,6 @@ namespace GenericsHomework
 {
     public class Node<TNodeType> : ICollection<TNodeType>
     {
-
-        // We need to add a constructor that takes a value 
-        // We also need a constructor that takes a value and a next value
-        // Rename CircularLinkedList to Node
-        // Remove the interior Node class
-        // Remove the Set Next 
-        // We remove Current Node
-        // We get rid of size replacing for loops with while curr != header; 
         private Node<TNodeType>? _Next { get; set; }
 
         private TNodeType? _Value;

@@ -8,7 +8,7 @@ using System.Text;
 namespace GenericsHomework.Tests
 {
     [TestClass]
-    public class LinkedListTests
+    public class NodeTests
     {
         private Node<string>? TestNode { get; set; } = null;
 
@@ -86,7 +86,7 @@ namespace GenericsHomework.Tests
         }
 
         [TestMethod]
-        public void ContainsNodeTestBody()
+        public void ExistsNodeTestBody()
         {
             // Arrange
             Assert.IsNotNull(TestNode);
@@ -95,6 +95,19 @@ namespace GenericsHomework.Tests
             TestNode.Append("2");
             TestNode.Append("3");
             Assert.IsTrue(TestNode.Exists("2"));
+
+        }
+
+        [TestMethod]
+        public void ContainsNodeTestBody()
+        {
+            // Arrange
+            Assert.IsNotNull(TestNode);
+
+            TestNode.Add("1");
+            TestNode.Add("2");
+            TestNode.Add("3");
+            Assert.IsTrue(TestNode.Contains("2"));
 
         }
 
