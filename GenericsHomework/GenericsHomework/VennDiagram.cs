@@ -8,25 +8,29 @@ namespace GenericsHomework
 {
     public class VennDiagram<TCircleType>
     {
-        private List<CircularLinkedList<TCircleType>> CircleList { get; set; } = new List<CircularLinkedList<TCircleType>>();
+        private List<Node<TCircleType>> CircleList { get; set; } = new List<Node<TCircleType>>();
 
-        public CircularLinkedList<TCircleType> Get(int id) {
+        public Node<TCircleType> Get(int id)
+        {
 
             return CircleList[id];
         }
 
-        public void Add(TCircleType firstIndex) {
-            CircleList.Add(item: new CircularLinkedList<TCircleType>(firstIndex));
+        public void Add(TCircleType firstIndex)
+        {
+            CircleList.Add(item: new Node<TCircleType>(firstIndex));
         }
 
         public override string ToString()
         {
             string output = "";
-            foreach (CircularLinkedList<TCircleType> circle in CircleList) {
-                output += circle.ToString(); 
-            
+            foreach (Node<TCircleType> circle in CircleList)
+            {
+                output += circle.ToString();
+
             }
-            return output; 
+            return output;
         }
     }
 }
+    

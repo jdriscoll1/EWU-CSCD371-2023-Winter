@@ -1,19 +1,21 @@
 
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Diagnostics.Metrics;
+using System.Text;
 
 namespace GenericsHomework.Tests
 {
     [TestClass]
     public class LinkedListTests
     {
-        private CircularLinkedList<string>? TestLinkedList { get; set; } = null;
+        private Node<string>? TestNode { get; set; } = null;
 
         [TestInitialize]
-        public void InstantiateLinkedList()
+        public void InstantiateNode()
         {
 
-            TestLinkedList = new("myString");
+            TestNode = new("myString");
 
         }
 
@@ -21,104 +23,92 @@ namespace GenericsHomework.Tests
         [TestMethod]
         public void CheckIfNextThrowsExceptionIfNull()
         {
-            Assert.IsNotNull(TestLinkedList);
+            Assert.IsNotNull(TestNode);
 
         }
 
 
 
         [TestMethod]
-        public void AppendNodeToLinkedList()
+        public void AppendNodeTest()
         {
-            Assert.IsNotNull(TestLinkedList);
-            TestLinkedList.Append("Test Node");
+            Assert.IsNotNull(TestNode);
+            TestNode.Append("Test Node");
 
-            Assert.IsTrue(TestLinkedList.Exists("Test Node"));
+            Assert.IsTrue(TestNode.Exists("Test Node"));
         }
 
 
         [TestMethod]
-        public void TestLinkedListSize_AssertEqualsTo5()
-        {
-            // Arrange
-            Assert.IsNotNull(TestLinkedList);
-            TestLinkedList.Append("string 2");
-            TestLinkedList.Append("string 3");
-            TestLinkedList.Append("string 4");
-            TestLinkedList.Append("string 5");
-
-            // Assert
-            Assert.AreEqual<int>(TestLinkedList.Size, 5);
-
-
-        }
-        [TestMethod]
-        public void ClearLinkedList()
+        public void ClearNodes()
         {
             // Arrange
-            Assert.IsNotNull(TestLinkedList);
-            TestLinkedList.Append("1");
-            TestLinkedList.Append("2");
-            TestLinkedList.Append("3");
-            TestLinkedList.Append("4");
-            TestLinkedList.Append("5");
-            TestLinkedList.Append("6");
-            TestLinkedList.Append("7");  
-            Assert.AreEqual<string>(TestLinkedList.ToString(), "myString 7 6 5 4 3 2 1 "); 
+            Assert.IsNotNull(TestNode);
+            TestNode.Append("1");
+            TestNode.Append("2");
+            TestNode.Append("3");
+            TestNode.Append("4");
+            TestNode.Append("5");
+            TestNode.Append("6");
+            TestNode.Append("7");  
+            Assert.AreEqual<string>( "myString 7 6 5 4 3 2 1 ", TestNode.ToString()); 
 
             
             // Act
-            TestLinkedList.Clear();
+            TestNode.Clear();
 
             // Assert
-            Assert.AreEqual<int>(TestLinkedList.Size, 1);
-            Assert.AreEqual<string>(TestLinkedList.ToString(), "myString "); 
+            Assert.AreEqual<string>(TestNode.ToString(), "myString "); 
 
 
 
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void AssertDuplicatesCannotBeAddedToLinkedList() {
-            Assert.IsNotNull(TestLinkedList);
-            TestLinkedList.Append("1");
-            TestLinkedList.Append("1");
+        public void AssertDuplicatesCannotBeAddedNode() {
+            Assert.IsNotNull(TestNode);
+            TestNode.Append("1");
+            TestNode.Append("1");
 
 
         }
 
         [TestMethod]
-        public void ContainsLinkedListTest()
+        public void ContainsLinkedListTestHead()
         {
             // Arrange
-            Assert.IsNotNull(TestLinkedList);
-            string expected = "myString";
-
-
-            // Assert
-            Assert.IsTrue(TestLinkedList.Exists(expected));
-
-        }
-
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-
+            Assert.IsNotNull(TestNode);
+        
+            
+            Assert.IsTrue(TestNode.Exists("myString"));
 
         }
 
         [TestMethod]
-        public void OutputLinkedList()
+        public void ContainsNodeTestBody()
+        {
+            // Arrange
+            Assert.IsNotNull(TestNode);
+
+            TestNode.Append("1");
+            TestNode.Append("2");
+            TestNode.Append("3");
+            Assert.IsTrue(TestNode.Exists("2"));
+
+        }
+
+
+        [TestMethod]
+        public void OutputNodes()
         {
 
             // Arrange
-            Assert.IsNotNull(TestLinkedList); 
+            Assert.IsNotNull(TestNode); 
             string expected = "myString ";
 
 
             // Assert
-            Assert.AreEqual<string>(expected, TestLinkedList.ToString()); 
+            Assert.AreEqual<string>(expected, TestNode.ToString()); 
 
         }
     }
