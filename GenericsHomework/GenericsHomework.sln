@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericsHomework", "GenericsHomework\GenericsHomework.csproj", "{044A7379-5374-464A-9D33-F22DB9CE947A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericHomework.Tests", "GenericHomework.Tests\GenericHomework.Tests.csproj", "{28037E07-4487-407E-BB34-5829136CCB46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericsHomework.Tests", "GenericsHomework.Tests\GenericsHomework.Tests.csproj", "{28037E07-4487-407E-BB34-5829136CCB46}"
 	ProjectSection(ProjectDependencies) = postProject
 		{044A7379-5374-464A-9D33-F22DB9CE947A} = {044A7379-5374-464A-9D33-F22DB9CE947A}
 	EndProjectSection
