@@ -47,7 +47,7 @@ namespace GenericsHomework
         
         }
 
-        bool ICollection<TNodeType>.IsReadOnly => throw new NotImplementedException();
+        public readonly bool IsReadOnly = false;
 
         public Node(TNodeType value)
         {
