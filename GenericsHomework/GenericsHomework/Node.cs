@@ -35,19 +35,18 @@ namespace GenericsHomework
         public int Count
         {
             get {
-                int count = 1;  
-                Node<TNodeType> curr = Next; 
-                while (curr != this) {
-                    count++;
-                    curr = curr.Next; 
-                    
+                int count = 0; 
+                foreach (TNodeType element in this) {
+                    count++; 
                 }
                 return count; 
+
             }
         
         }
 
-        public readonly bool IsReadOnly = false;
+        bool ICollection<TNodeType>.IsReadOnly { get; } = false; 
+
 
         public Node(TNodeType value)
         {
