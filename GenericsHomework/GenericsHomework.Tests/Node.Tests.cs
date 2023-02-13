@@ -204,6 +204,19 @@ namespace GenericsHomework.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void ValidateCopyToThrowOutofRangeException()
+        {
+            // Arrange
+            Assert.IsNotNull(TestNode);
+            string[] nullArray = { "1", "2"};
+
+            // Act
+            TestNode.CopyTo(nullArray, 3);
+
+        }
+
+        [TestMethod]
         public void TestEnumerator_ReturnTrueIfOutputIntoString() {
             // Arrange
             Assert.IsNotNull(TestNode);

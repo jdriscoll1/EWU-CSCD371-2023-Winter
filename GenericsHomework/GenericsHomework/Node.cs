@@ -130,6 +130,9 @@ namespace GenericsHomework
             if (array is null) {
                 throw new ArgumentNullException(nameof(array));
             }
+            if (arrayIndex > array.Length) {
+                throw new ArgumentOutOfRangeException(nameof(arrayIndex)); 
+            }
             Node<TNodeType> head = this; 
             Node<TNodeType> curr = this; 
           
