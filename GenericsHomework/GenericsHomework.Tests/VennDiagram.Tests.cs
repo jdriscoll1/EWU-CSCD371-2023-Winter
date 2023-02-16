@@ -36,7 +36,7 @@ namespace GenericsHomework.Tests
             charDiagram.Get(0).Append('D');
             charDiagram.Get(1).Append('E');
             charDiagram.Get(1).Append('F');
-            string expected = "A D C B F E ";
+            string expected = "ADCBFE";
             Assert.AreEqual<string>(expected, charDiagram.ToString());
 
         }
@@ -44,7 +44,7 @@ namespace GenericsHomework.Tests
         [TestMethod]
         public void PrintVennDiagram()
         {
-            string expected = "0 2 1 1 3 2 ";
+            string expected = "021132";
             Assert.AreEqual<string>(expected, TestVennDiagram.ToString());
 
         }

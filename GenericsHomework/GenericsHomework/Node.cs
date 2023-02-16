@@ -87,19 +87,23 @@ namespace GenericsHomework
             return false; 
         }
 
+        public TNodeType[] ToArray()
+        {
+            TNodeType[] array = new TNodeType[Count];
+            int i = 0; 
+            foreach (TNodeType element in this)
+            {
+                array[i] = element;
+                i++; 
+            }
+            return array; 
+        
+        }
 
         public override string ToString()
         {
-            string linkedListString = Value + " ";
-            Node<TNodeType> head = this;
-            Node<TNodeType> curr = Next;
-            while (curr != head)
-            {
-                linkedListString += curr.Value + " ";
-                curr = curr.Next;
-            }
-            return linkedListString;
-
+            return Value?.ToString() ?? "null";
+           
         }
 
         public void Clear() {

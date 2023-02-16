@@ -26,11 +26,16 @@ namespace GenericsHomework
             string output = "";
             foreach (Node<TCircleType> circle in CircleList)
             {
-                output += circle.ToString();
+                foreach (TCircleType element in circle) {
+                    output += element; 
+                }
+                
 
             }
             return output;
         }
+
+
     }
 }
     

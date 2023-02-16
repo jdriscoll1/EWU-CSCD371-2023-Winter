@@ -22,12 +22,27 @@ namespace GenericsHomework.Tests
 
 
         [TestMethod]
-        public void CheckIfNextThrowsExceptionIfNull()
+        public void ValidateListWithSizeOneNextEqualsThis()
         {
             Assert.IsNotNull(TestNode);
+            Assert.AreEqual<int>(TestNode.Count, 1);
+            Assert.AreEqual<Node<string>>(TestNode, TestNode.Next); 
 
         }
+        [TestMethod]
+        public void ValidateListWithSizeTwoNextEqualsThis()
+        {
+            // Arrange
+            Assert.IsNotNull(TestNode);
 
+            // Act
+            TestNode.Append("any ol' string");
+
+            // Assert
+            Assert.AreEqual<int>(TestNode.Count, 2);
+            Assert.AreEqual<Node<string>>(TestNode, TestNode.Next.Next);
+
+        }
 
 
         [TestMethod]
@@ -39,10 +54,27 @@ namespace GenericsHomework.Tests
             Assert.IsTrue(TestNode.Exists("Test Node"));
         }
 
+        [TestMethod]
+        public void ValidateToArray() {
+            // Arrange
+            Assert.IsNotNull(TestNode);
+            TestNode.Append("1");
+            TestNode.Append("2");
+            TestNode.Append("3");
+            TestNode.Append("4");
+            TestNode.Append("5");
+            TestNode.Append("6");
+            TestNode.Append("7");
+            // Collection assert does not have a generic override
+            CollectionAssert.AreEqual(new string[] { "myString", "7", "6", "5", "4", "3", "2", "1" }, TestNode.ToArray());
+
+        }
+
 
         [TestMethod]
         public void ClearNodes()
         {
+            
             // Arrange
             Assert.IsNotNull(TestNode);
             TestNode.Append("1");
@@ -52,14 +84,13 @@ namespace GenericsHomework.Tests
             TestNode.Append("5");
             TestNode.Append("6");
             TestNode.Append("7");  
-            Assert.AreEqual<string>( "myString 7 6 5 4 3 2 1 ", TestNode.ToString()); 
-
+            CollectionAssert.AreEqual(new string[]{ "myString", "7", "6", "5", "4", "3", "2", "1"}, TestNode.ToArray());
             
             // Act
             TestNode.Clear();
 
             // Assert
-            Assert.AreEqual<string>(TestNode.ToString(), "myString "); 
+            CollectionAssert.AreEqual(new string[] { "myString" }, TestNode.ToArray()); 
 
 
 
@@ -113,12 +144,12 @@ namespace GenericsHomework.Tests
 
 
         [TestMethod]
-        public void OutputNodes()
+        public void ValidateNodeToString()
         {
 
             // Arrange
             Assert.IsNotNull(TestNode); 
-            string expected = "myString ";
+            string expected = "myString";
 
 
             // Assert
@@ -155,10 +186,7 @@ namespace GenericsHomework.Tests
             TestNode.Add("2");
             string[] arr = {"3", "4", "5"};
             TestNode.CopyTo(arr, 0);
-            
-            Assert.AreEqual<string>(string.Join(" ", arr), TestNode.ToString().Trim());
-            TestNode.Clear(); 
-
+            CollectionAssert.AreEqual(arr, TestNode.ToArray());
         }
 
         [TestMethod]
@@ -170,7 +198,7 @@ namespace GenericsHomework.Tests
             string[] arr = { "3", "4", "5" };
             TestNode.CopyTo(arr, 1);
 
-            Assert.AreEqual<string>("3 myString 2", string.Join(" ", arr));
+            CollectionAssert.AreEqual(new string[] { "3", "myString", "2" }, arr);
             TestNode.Clear(); 
 
         }
@@ -245,19 +273,20 @@ namespace GenericsHomework.Tests
             TestNode.Append("1");
             TestNode.Append("2");
             TestNode.Append("3");
-            Assert.AreEqual<string>("myString 3 2 1 ", TestNode.ToString());
+            CollectionAssert.AreEqual(new string[] { "myString", "3", "2", "1" }, TestNode.ToArray());
+
 
             // Act
             Assert.IsTrue(TestNode.Remove("2"));
 
             // Assert
-            Assert.AreEqual<string>("myString 3 1 ", TestNode.ToString());
+            CollectionAssert.AreEqual(new string[] { "myString", "3", "1" }, TestNode.ToArray());
 
             // Act
             Assert.IsTrue(TestNode.Remove("3"));
 
             // Assert
-            Assert.AreEqual<string>("myString 1 ", TestNode.ToString());
+            CollectionAssert.AreEqual(new string[] { "myString", "1" }, TestNode.ToArray());
 
             Assert.IsFalse(TestNode.Remove("myString"));
 
