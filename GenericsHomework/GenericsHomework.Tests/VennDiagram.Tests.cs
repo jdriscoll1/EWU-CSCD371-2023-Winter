@@ -8,11 +8,9 @@ using System.Threading.Tasks;
 
 namespace GenericsHomework.Tests
 {
-    
     [TestClass]
     public class VennDiagram
     {
-
         VennDiagram<int> TestVennDiagram { get; set; } = null!; 
         [TestInitialize]
         public void InstantateVennDiagram()
@@ -24,7 +22,6 @@ namespace GenericsHomework.Tests
             TestVennDiagram.Get(0).Append(2);
             TestVennDiagram.Get(1).Append(2);
             TestVennDiagram.Get(1).Append(3);
-
         }
         [TestMethod]
         public void InstantiateVennDiagram() {
@@ -38,17 +35,12 @@ namespace GenericsHomework.Tests
             charDiagram.Get(1).Append('F');
             string expected = "ADCBFE";
             Assert.AreEqual<string>(expected, charDiagram.ToString());
-
         }
-
         [TestMethod]
         public void PrintVennDiagram()
         {
             string expected = "021132";
             Assert.AreEqual<string>(expected, TestVennDiagram.ToString());
-
         }
-
-    
     }
 }

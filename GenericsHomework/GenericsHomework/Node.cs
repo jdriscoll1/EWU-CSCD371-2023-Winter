@@ -19,8 +19,6 @@ namespace GenericsHomework
                 _Value = value;
             }
         }        
-       
-
         public Node<TNodeType> Next
         {
             get {
@@ -31,7 +29,6 @@ namespace GenericsHomework
                 _Next = value; 
             }
         }
-
         public int Count
         {
             get {
@@ -40,14 +37,9 @@ namespace GenericsHomework
                     count++; 
                 }
                 return count; 
-
             }
-        
         }
-
         bool ICollection<TNodeType>.IsReadOnly { get; } = false; 
-
-
         public Node(TNodeType value)
         {
             Value = value;
@@ -59,17 +51,13 @@ namespace GenericsHomework
             Next = next;
         }
 
-
-
         public void Append(TNodeType data) {
             if (Exists(data)) {
                 throw new ArgumentException($"{data} is already added in list");
             }
-            
             Node<TNodeType> newNode = new(data, Next);
             Console.WriteLine(newNode.Value);
             Next = newNode; 
-        
         }
 
         public bool Exists(TNodeType data) {
@@ -97,13 +85,11 @@ namespace GenericsHomework
                 i++; 
             }
             return array; 
-        
         }
 
         public override string ToString()
         {
             return Value?.ToString() ?? "null";
-           
         }
 
         public void Clear() {
@@ -123,7 +109,6 @@ namespace GenericsHomework
         {
             Append(item);
         }
-
         bool ICollection<TNodeType>.Contains(TNodeType item)
         {
             return Exists(item); 
@@ -154,8 +139,6 @@ namespace GenericsHomework
                 curr = curr.Next; 
                 index++; 
             } while (curr != head); 
-            
-      
         }
 
         public bool Remove(TNodeType item)
@@ -175,9 +158,6 @@ namespace GenericsHomework
                     // Without a reference to curr, the garbage collector will remove it 
                     prev.Next = curr.Next;
                     return true; 
-            
-
-
                 }
                 prev = curr;
                 curr = curr.Next;
@@ -186,21 +166,6 @@ namespace GenericsHomework
             return false; 
         }
 
-      
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            Node<TNodeType> curr = this;
-            do
-            {
-                yield return curr.Value!;
-                curr = curr.Next;
-
-            } while (curr != this);
-
-        }
-
-
         IEnumerator<TNodeType> IEnumerable<TNodeType>.GetEnumerator()
         {
             Node<TNodeType> curr = this;
@@ -208,7 +173,16 @@ namespace GenericsHomework
             {
                 yield return curr.Value!;
                 curr = curr.Next;
+            } while (curr != this);
+        }
 
+        public IEnumerator GetEnumerator()
+        {
+            Node<TNodeType> curr = this;
+            do
+            {
+                yield return curr.Value!;
+                curr = curr.Next;
             } while (curr != this);
 
         }

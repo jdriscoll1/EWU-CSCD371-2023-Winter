@@ -15,12 +15,8 @@ namespace GenericsHomework.Tests
         [TestInitialize]
         public void InstantiateNode()
         {
-
             TestNode = new("myString");
-
         }
-
-
         [TestMethod]
         public void ValidateListWithSizeOneNextEqualsThis()
         {
@@ -43,17 +39,13 @@ namespace GenericsHomework.Tests
             Assert.AreEqual<Node<string>>(TestNode, TestNode.Next.Next);
 
         }
-
-
         [TestMethod]
         public void AppendNodeTest()
         {
             Assert.IsNotNull(TestNode);
             TestNode.Append("Test Node");
-
             Assert.IsTrue(TestNode.Exists("Test Node"));
         }
-
         [TestMethod]
         public void ValidateToArray() {
             // Arrange
@@ -67,14 +59,10 @@ namespace GenericsHomework.Tests
             TestNode.Append("7");
             // Collection assert does not have a generic override
             CollectionAssert.AreEqual(new string[] { "myString", "7", "6", "5", "4", "3", "2", "1" }, TestNode.ToArray());
-
         }
-
-
         [TestMethod]
         public void ClearNodes()
         {
-            
             // Arrange
             Assert.IsNotNull(TestNode);
             TestNode.Append("1");
@@ -85,14 +73,17 @@ namespace GenericsHomework.Tests
             TestNode.Append("6");
             TestNode.Append("7");  
             CollectionAssert.AreEqual(new string[]{ "myString", "7", "6", "5", "4", "3", "2", "1"}, TestNode.ToArray());
-            
             // Act
             TestNode.Clear();
-
             // Assert
             CollectionAssert.AreEqual(new string[] { "myString" }, TestNode.ToArray()); 
-
-
+        }
+        [TestMethod]
+        public void AssertContainsReturnsFalse()
+        {
+            Assert.IsNotNull(TestNode);
+            Assert.IsFalse(TestNode.Contains("1"));
+            Assert.IsFalse(TestNode.Exists("1"));
 
         }
         [TestMethod]
@@ -101,8 +92,6 @@ namespace GenericsHomework.Tests
             Assert.IsNotNull(TestNode);
             TestNode.Append("1");
             TestNode.Append("1");
-
-
         }
 
         [TestMethod]
@@ -110,12 +99,8 @@ namespace GenericsHomework.Tests
         {
             // Arrange
             Assert.IsNotNull(TestNode);
-        
-            
             Assert.IsTrue(TestNode.Exists("myString"));
-
         }
-
         [TestMethod]
         public void ExistsNodeTestBody()
         {
@@ -139,34 +124,24 @@ namespace GenericsHomework.Tests
             TestNode.Add("2");
             TestNode.Add("3");
             Assert.IsTrue(TestNode.Contains("2"));
-
         }
-
 
         [TestMethod]
         public void ValidateNodeToString()
         {
-
             // Arrange
             Assert.IsNotNull(TestNode); 
             string expected = "myString";
-
-
             // Assert
             Assert.AreEqual<string>(expected, TestNode.ToString()); 
-
         }
-
         [TestMethod]
         public void ValidateCountReturnsNumberOfItems()
         {
             Assert.IsNotNull(TestNode); 
- 
             Assert.AreEqual<int>(TestNode.Count(), 1);
             TestNode.Append("1");
-            
             Assert.AreEqual<int>(TestNode.Count(), 2);
-            
             TestNode.Append("2");
             Assert.AreEqual<int>(TestNode.Count(), 3);
             TestNode.Append("3");
@@ -175,9 +150,7 @@ namespace GenericsHomework.Tests
             Assert.AreEqual<int>(TestNode.Count(), 5);
             TestNode.Clear();
             Assert.AreEqual<int>(TestNode.Count(), 1);
-            
         }
-
         [TestMethod]
         public void ConvertLinkedListToArray_StartAt0()
         {
@@ -188,7 +161,6 @@ namespace GenericsHomework.Tests
             TestNode.CopyTo(arr, 0);
             CollectionAssert.AreEqual(arr, TestNode.ToArray());
         }
-
         [TestMethod]
         public void ConvertLinkedListToArray_StartAt1()
         {
@@ -197,12 +169,8 @@ namespace GenericsHomework.Tests
             TestNode.Add("2");
             string[] arr = { "3", "4", "5" };
             TestNode.CopyTo(arr, 1);
-
             CollectionAssert.AreEqual(new string[] { "3", "myString", "2" }, arr);
-            TestNode.Clear(); 
-
         }
-
         [TestMethod]
         public void ConvertLinkedListToArray_StartAt2()
         {
@@ -211,12 +179,8 @@ namespace GenericsHomework.Tests
             TestNode.Add("2");
             string[] arr = { "3", "4", "5" };
             TestNode.CopyTo(arr, 2);
-
             Assert.AreEqual<string>("3 4 myString", string.Join(" ", arr));
-            TestNode.Clear(); 
-
         }
-
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -225,12 +189,9 @@ namespace GenericsHomework.Tests
             // Arrange
             Assert.IsNotNull(TestNode);
             string[] nullArray = null!;
-
             // Act
             TestNode.CopyTo(nullArray, 0); 
-
         }
-
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ValidateCopyToThrowOutofRangeException()
@@ -238,12 +199,9 @@ namespace GenericsHomework.Tests
             // Arrange
             Assert.IsNotNull(TestNode);
             string[] nullArray = { "1", "2"};
-
             // Act
             TestNode.CopyTo(nullArray, 3);
-
         }
-
         [TestMethod]
         public void TestEnumerator_ReturnTrueIfOutputIntoString() {
             // Arrange
@@ -261,8 +219,6 @@ namespace GenericsHomework.Tests
             }
             string expected = "myString3210";
             Assert.AreEqual<string>(expected, actual);
-            TestNode.Clear();
-
         }
 
         [TestMethod]
@@ -274,7 +230,6 @@ namespace GenericsHomework.Tests
             TestNode.Append("2");
             TestNode.Append("3");
             CollectionAssert.AreEqual(new string[] { "myString", "3", "2", "1" }, TestNode.ToArray());
-
 
             // Act
             Assert.IsTrue(TestNode.Remove("2"));
@@ -291,11 +246,6 @@ namespace GenericsHomework.Tests
             Assert.IsFalse(TestNode.Remove("myString"));
 
             Assert.IsFalse(TestNode.Remove("2"));
-
-
-
         }
-
-
     }
 }
