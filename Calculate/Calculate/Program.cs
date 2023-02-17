@@ -10,7 +10,7 @@ namespace Calculate
     {
 
         static public void Main() {
-            Program program = new Program();
+            Program program = new();
             bool userInputIncorrect = false;
             int? result = null;
             string? userInput = null; 
@@ -21,7 +21,7 @@ namespace Calculate
                 userInput = program.ReadLine();
                 try
                 {
-                    result = Calculator.TryCalculate(userInput!);
+                    result = Calculator<int>.TryCalculate(userInput!);
                 }
                 catch (ArgumentNullException)
                 {

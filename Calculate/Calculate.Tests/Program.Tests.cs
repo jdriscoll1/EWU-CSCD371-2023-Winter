@@ -58,7 +58,7 @@ namespace Calculate.Tests
 
             userInput = program.ReadLine();
              
-            int? result = Calculator.TryCalculate(userInput!);
+            int? result = Calculator<int>.TryCalculate(userInput!);
                 
              
             program.WriteLine($"The result of the following equation: {userInput} is {result}");

@@ -7,33 +7,33 @@ namespace Calculate.Tests
         [TestMethod]
         public void TestAdd()
         {
-            Assert.AreEqual<int>(Calculator.Add(1, 1), 2);
+            Assert.AreEqual<int>(Calculator<int>.Add(1, 1), 2);
         }
         [TestMethod]
         public void TestSubtract()
         {
-            Assert.AreEqual<int>(Calculator.Subtract(2, 1), 1);
+            Assert.AreEqual<int>(Calculator<int>.Subtract(2, 1), 1);
         }
 
         [TestMethod]
         public void TestMultiply()
         {
-            Assert.AreEqual<int>(Calculator.Multiply(2, 2), 4);
+            Assert.AreEqual<int>(Calculator<int>.Multiply(2, 2), 4);
         }
 
         [TestMethod]
         public void TestDivide()
         {
-            Assert.AreEqual<int>(Calculator.Divide(2, 1), 2);
+            Assert.AreEqual<int>(Calculator<int>.Divide(2, 1), 2);
         }
 
         [TestMethod]
         public void ValidateThatDictionaryProperlyReturnsLambdaFunction()
         {
-            Assert.AreEqual<Func<int, int, int>>(Calculator.Subtract, Calculator.mathematicalOperations['-']);
-            Assert.AreEqual<Func<int, int, int>>(Calculator.Add, Calculator.mathematicalOperations['+']);
-            Assert.AreEqual<Func<int, int, int>>(Calculator.Multiply, Calculator.mathematicalOperations['*']);
-            Assert.AreEqual<Func<int, int, int>>(Calculator.Divide, Calculator.mathematicalOperations['/']);
+            Assert.AreEqual<Func<int, int, int>>(Calculator<int>.Subtract, Calculator<int>.mathematicalOperations['-']);
+            Assert.AreEqual<Func<int, int, int>>(Calculator<int>.Add, Calculator<int>.mathematicalOperations['+']);
+            Assert.AreEqual<Func<int, int, int>>(Calculator<int>.Multiply, Calculator<int>.mathematicalOperations['*']);
+            Assert.AreEqual<Func<int, int, int>>(Calculator<int>.Divide, Calculator<int>.mathematicalOperations['/']);
 
         }
 
@@ -45,7 +45,7 @@ namespace Calculate.Tests
             int? expected = 4;
 
             // Act
-            int? actual = Calculator.TryCalculate(equation);
+            int? actual = Calculator<int>.TryCalculate(equation);
 
             // Assert
             Assert.AreEqual<int?>(actual, expected); 
@@ -55,7 +55,7 @@ namespace Calculate.Tests
         [ExpectedException(typeof(FormatException))]
         public void ParsingEquationTestFalseCase()
         {
-            Calculator.TryCalculate("I am John");
+            Calculator<int>.TryCalculate("I am John");
 
         }
 
@@ -63,7 +63,14 @@ namespace Calculate.Tests
         [ExpectedException(typeof(FormatException))]
         public void ParsingEquationTestFalseCase2()
         {
-            Calculator.TryCalculate("IamJohn");
+            Calculator<int>.TryCalculate("IamJohn");
+
+        }
+
+        [TestMethod]
+        public void GenericCalculateTest()
+        {
+            Assert.AreEqual<double>(2.5, Calculator<double>.TryCalculate(".5 + 2"));
 
         }
     }
