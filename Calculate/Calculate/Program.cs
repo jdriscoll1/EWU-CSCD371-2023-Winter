@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace Calculate
 {
-    public class Program
+    public class Program : ProgramBase
     {
-        public Action<string> WriteLine { get; init; } = Console.WriteLine;
-
-        public Func<string?> ReadLine { get; init; } = Console.ReadLine;
-
 
         static public void Main() {
             Program program = new Program();
