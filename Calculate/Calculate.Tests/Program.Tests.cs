@@ -19,7 +19,7 @@ namespace Calculate.Tests
             string expected = "str";
 
             // Act
-            Program.WriteLine(expected);
+            new Program().WriteLine(expected);
 
             // Assert
             Assert.AreEqual<string>(expected, stringWriter.ToString().Trim());
@@ -29,16 +29,16 @@ namespace Calculate.Tests
         public void TestReadLine()
         {
             // Arrange
-            string testString = "string";
+            string? testString = "string";
             using StringReader stringReader = new(testString);
             Console.SetIn(stringReader);
 
 
             // Act
-            string? input = Program.ReadLine(); 
+            string? input = new Program().ReadLine(); 
 
             // Assert
-            Assert.AreEqual<string>(testString, input!);
+            Assert.AreEqual<string?>(testString, input);
 
         }
 
