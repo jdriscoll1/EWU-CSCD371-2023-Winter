@@ -38,7 +38,7 @@ namespace Calculate.Tests
         }
 
         [TestMethod]
-        public void ParsingEquationTestTrueCase()
+        public void EquationTestTrueCase()
         {
             // Arrange
             string equation = "2 + 2";
@@ -53,7 +53,7 @@ namespace Calculate.Tests
 
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
-        public void ParsingEquationTestFalseCase()
+        public void EquationTestFalseCase()
         {
             Calculator<int>.TryCalculate("I am John");
 
@@ -61,7 +61,7 @@ namespace Calculate.Tests
 
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
-        public void ParsingEquationTestFalseCase2()
+        public void EquationTestFalseCase2()
         {
             Calculator<int>.TryCalculate("IamJohn");
 

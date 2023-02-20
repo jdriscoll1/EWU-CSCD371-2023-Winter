@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConsoleUtilities; 
 
 namespace Calculate
 {
     public class Program : ProgramBase
     {
 
-        static public void Main() {
+         static public void Main() {
             Program program = new();
             bool userInputIncorrect = false;
             int? result = null;
