@@ -1,4 +1,6 @@
-﻿using System.Numerics;
+﻿using System.ComponentModel;
+using System.Globalization;
+using System.Numerics;
 
 namespace Calculate
 {
@@ -19,14 +21,37 @@ namespace Calculate
             ['/'] = Divide        
         };
 
-        public static T? TryCalculate (string equation)
+        private static bool TryParse(string text, out T value)
+
         {
-            string[] equationArray = equation.Split(" ");
-            if ((Convert.ChangeType(equationArray[0], typeof(T)), equationArray[1][0], Convert.ChangeType(equationArray[2], typeof(T))) is (T operand1, char operatorChar, T operand2)) {
-                return mathematicalOperations[operatorChar](operand1, operand2); 
-            
+            value = default(T)!;
+            try
+            { 
+                value = (T)Convert.ChangeType(text, typeof(T));
+                return true;
             }
-            return default; 
+            catch
+            { 
+                return false;
+
+            }
+        }
+
+        public static bool TryCalculate (string equation, out T result)
+        {
+            result = default!; 
+            if (equation is null) {
+                return false; 
+            }
+            string[] equationArray = equation.Split(" ");
+
+            if (TryParse(equationArray[0], out T? operand1) && char.TryParse(equationArray[1], out char operatorChar) && TryParse(equationArray[2], out T? operand2))
+            {
+              
+                result = mathematicalOperations[operatorChar](operand1, operand2);
+                return true; 
+            } 
+            return false; 
         }
  
     }

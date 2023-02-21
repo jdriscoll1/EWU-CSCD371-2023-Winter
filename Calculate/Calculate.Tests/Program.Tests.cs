@@ -53,8 +53,8 @@ namespace Calculate.Tests
 
             userInput = program.ReadLine();
              
-            int? result = Calculator<int>.TryCalculate(userInput!);
-                
+            Assert.IsTrue(Calculator<int>.TryCalculate(userInput!, out int result));
+              
              
             program.WriteLine($"The result of the following equation: {userInput} is {result}");
             Assert.AreEqual<string>(expected, stringWriter.ToString().Trim()); 

@@ -42,35 +42,35 @@ namespace Calculate.Tests
         {
             // Arrange
             string equation = "2 + 2";
-            int? expected = 4;
+            int expected = 4;
 
             // Act
-            int? actual = Calculator<int>.TryCalculate(equation);
+            Assert.IsTrue(Calculator<int>.TryCalculate(equation, out int actual));
 
             // Assert
-            Assert.AreEqual<int?>(actual, expected); 
+            Assert.AreEqual<int>(actual, expected); 
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FormatException))]
         public void EquationTestFalseCase()
         {
-            Calculator<int>.TryCalculate("I am John");
+            Assert.IsFalse(Calculator<int>.TryCalculate("I am John", out _));
 
         }
 
+
         [TestMethod]
-        [ExpectedException(typeof(FormatException))]
         public void EquationTestFalseCase2()
         {
-            Calculator<int>.TryCalculate("IamJohn");
+            Assert.IsFalse(Calculator<int>.TryCalculate("IamJohn", out _));
 
         }
 
         [TestMethod]
         public void GenericCalculateTest()
         {
-            Assert.AreEqual<double>(2.5, Calculator<double>.TryCalculate(".5 + 2"));
+            Assert.IsTrue(Calculator<double>.TryCalculate(".5 + 2", out double actual));
+            Assert.AreEqual<double>(2.5, actual);
 
         }
     }
