@@ -1,12 +1,8 @@
-﻿using System.ComponentModel;
-using System.Globalization;
-using System.Numerics;
+﻿using System.Numerics;
 
 namespace Calculate
 {
     public class Calculator<T> where T : INumber<T> 
-
-
     {
         public static readonly Func<T, T, T> Add = (T param1, T param2) => param1 + param2;
         public static readonly Func<T, T, T> Subtract = (T param1, T param2) => param1 - param2;
@@ -20,11 +16,9 @@ namespace Calculate
             ['*'] = Multiply,
             ['/'] = Divide        
         };
-
         private static bool TryParse(string text, out T value)
-
         {
-            value = default(T)!;
+            value = default!;
             try
             { 
                 value = (T)Convert.ChangeType(text, typeof(T));

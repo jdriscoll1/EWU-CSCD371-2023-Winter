@@ -15,6 +15,7 @@ namespace Calculate.Tests
             Assert.AreEqual<int>(Calculator<int>.Subtract(2, 1), 1);
         }
 
+
         [TestMethod]
         public void TestMultiply()
         {

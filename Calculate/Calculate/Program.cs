@@ -1,4 +1,4 @@
-﻿using ConsoleUtilities; 
+﻿using ConsoleUtilities;
 
 namespace Calculate
 {
