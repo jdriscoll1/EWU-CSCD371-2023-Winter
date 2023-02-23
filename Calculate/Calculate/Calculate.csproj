@@ -2,4 +2,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConsoleUtilities\ConsoleUtilities.csproj" />
+  </ItemGroup>
 </Project>
