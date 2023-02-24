@@ -47,12 +47,20 @@ namespace Assignment.Tests
         }
 
         [TestMethod]
-        public void TestResultsoFOrderBy()
+        public void TestGetUniqueSortedListOfStatesGivenCsvRows_AssertTrueIfStatesAreOrdered()
         {
             IEnumerable<string> uniqueSortedListOfStates = new SampleData().GetUniqueSortedListOfStatesGivenCsvRows();
-            uniqueSortedListOfStates.Zip(uniqueSortedListOfStates.Skip(1), (curr, next) => String.Compare(curr, next) > 0).All(x => x);
+            _ = uniqueSortedListOfStates.Zip(uniqueSortedListOfStates.Skip(1), (curr, next) => String.Compare(curr, next) > 0).All(x => x);
             Assert.AreEqual<int>(27, uniqueSortedListOfStates.Count());
 
+        }
+
+        [TestMethod]
+        public void Test_GetAggregateSortedListOfStatesUsingCsvRows()
+        {
+            string expected = "AL,AZ,CA,DC,FL,GA,IN,KS,LA,MD,MN,MO,MT,NC,NE,NH,NV,NY,OR,PA,SC,TN,TX,UT,VA,WA,WV";
+            string actual = new SampleData().GetAggregateSortedListOfStatesUsingCsvRows().ToString();
+            Assert.AreEqual<string>(expected, actual); 
         }
     }
 }
