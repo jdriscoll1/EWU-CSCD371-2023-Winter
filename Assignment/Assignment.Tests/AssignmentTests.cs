@@ -2,7 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Assignment; 
+using Assignment;
+using System.Linq;
 
 namespace Assignment.Tests
 {
@@ -21,7 +22,8 @@ namespace Assignment.Tests
 
             using StreamReader sr = new("People.csv");
             string line;
-         
+            _ = sr.ReadLine()!;
+
             while ((line = sr.ReadLine()!) != null && csvEnumerator.MoveNext())
             {
                 Assert.AreEqual<string>(line, csvEnumerator.Current);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 
 namespace Assignment
@@ -11,7 +12,7 @@ namespace Assignment
         public IEnumerable<string> CsvRows { 
             get {
                 var inputFile = File.ReadAllLines("People.csv");
-                return new List<string>(inputFile);
+                return new List<string>(inputFile).Skip(1);
             } 
         }
 
