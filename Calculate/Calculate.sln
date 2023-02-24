@@ -10,6 +10,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculate", "Calculate\Calc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculate.Tests", "Calculate.Tests\Calculate.Tests.csproj", "{309DD2F9-62DD-41AB-B9C1-266CD3B6C6D9}"
 	ProjectSection(ProjectDependencies) = postProject
+		{7E50D11A-9FA3-4BBD-8368-F770EEF76F03} = {7E50D11A-9FA3-4BBD-8368-F770EEF76F03}
 		{DEB1771D-B98C-4145-A2EC-30CA2EF995FE} = {DEB1771D-B98C-4145-A2EC-30CA2EF995FE}
 	EndProjectSection
 EndProject

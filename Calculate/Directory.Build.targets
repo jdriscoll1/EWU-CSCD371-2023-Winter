@@ -1,6 +1,3 @@
 <Project>
-  <ItemGroup>
-    <ProjectReference Include="..\ConsoleUtilities\ConsoleUtilities.csproj" />
-  </ItemGroup>
 
 </Project>
