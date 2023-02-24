@@ -1,12 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Assignment
 {
     public class SampleData : ISampleData
     {
         // 1.
-        public IEnumerable<string> CsvRows => throw new NotImplementedException();
+        public IEnumerable<string> CsvRows { 
+            get {
+                var inputFile = File.ReadAllLines("People.csv");
+                return new List<string>(inputFile);
+            } 
+        }
 
         // 2.
         public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows() 
