@@ -4,4 +4,10 @@
     <ProjectReference Include="..\Assignment.Interfaces\Assignment.Interfaces.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="People.csv">
+      <CopyToOutputDirectory>CopyIfNewer</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
