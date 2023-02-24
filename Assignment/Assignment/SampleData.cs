@@ -27,11 +27,14 @@ namespace Assignment
             return states; 
 
         }
-            
+
 
         // 3.
-        public string GetAggregateSortedListOfStatesUsingCsvRows()
-            => throw new NotImplementedException();
+        public string GetAggregateSortedListOfStatesUsingCsvRows() {
+            IEnumerable<string> states = GetUniqueSortedListOfStatesGivenCsvRows();
+            string[] statesArray = states.Select(x => x).ToArray();
+            return string.Join(",", statesArray);
+        }
 
         // 4.
         public IEnumerable<IPerson> People => throw new NotImplementedException();
