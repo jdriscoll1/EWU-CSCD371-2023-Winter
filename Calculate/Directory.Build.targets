@@ -1,8 +1,6 @@
 <Project>
   <ItemGroup>
-    <Reference Include="ConsoleUtilities">
-      <HintPath>..\ConsoleUtilities\bin\Debug\net7.0\ConsoleUtilities.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\ConsoleUtilities\ConsoleUtilities.csproj" />
   </ItemGroup>
 
 </Project>

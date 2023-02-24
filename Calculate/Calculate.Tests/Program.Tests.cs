@@ -1,6 +1,4 @@
-﻿
-
-namespace Calculate.Tests
+﻿namespace Calculate.Tests
 {
     [TestClass]
     public class ProgramTests
