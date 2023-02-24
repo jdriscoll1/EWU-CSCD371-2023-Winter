@@ -3,6 +3,6 @@
     <OutputType>Exe</OutputType>
   </PropertyGroup>
    <ItemGroup>
-    <ProjectReference Include="..\ConsoleUtilties\ConsoleUtilities.csproj" />
+    <ProjectReference Include="..\ConsoleUtilities\ConsoleUtilities.csproj" />
   </ItemGroup>
 </Project>
