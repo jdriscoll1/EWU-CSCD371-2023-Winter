@@ -37,7 +37,27 @@ namespace Assignment
         }
 
         // 4.
-        public IEnumerable<IPerson> People => throw new NotImplementedException();
+        public IEnumerable<IPerson> People
+        {
+            get {
+                List<IPerson> people = new(); 
+
+                foreach (string row in CsvRows)
+                {
+
+                    string[] rowData = row.Split(",");
+       
+                    if (((rowData[1], rowData[2], rowData[3]) is (string firstName, string lastName, string email)) &&
+                         ((rowData[4], rowData[5], rowData[6], rowData[7]) is (string street, string city, string state, string zip))) {
+                        Address newAddress = new(street, city, state, zip);
+                        Person newPerson = new(firstName, lastName, newAddress, email);
+                        people.Add(newPerson); 
+                    }
+                }
+                return people.OrderBy(person => person.Address.State).ThenBy(person => person.Address.City).ThenBy(person => person.Address.Zip); 
+
+            }
+        }
 
         // 5.
         public IEnumerable<(string FirstName, string LastName)> FilterByEmailAddress(
