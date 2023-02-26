@@ -87,13 +87,7 @@ namespace Assignment.Tests
             IEnumerable<IPerson> people = new SampleData().People;
             Person actual = (Person)people.ElementAt(0);
             // Assert
-            Assert.AreEqual<string>(expected.FirstName, actual.FirstName);
-            Assert.AreEqual<string>(expected.LastName, actual.LastName);
-            Assert.AreEqual<string>(expected.EmailAddress, actual.EmailAddress);
-            Assert.AreEqual<string>(expected.Address.State, actual.Address.State);
-            Assert.AreEqual<string>(expected.Address.StreetAddress, actual.Address.StreetAddress);
-            Assert.AreEqual<string>(expected.Address.Zip, actual.Address.Zip);
-            Assert.AreEqual<string>(expected.Address.City, actual.Address.City);
+            Assert.IsTrue(expected == actual);
 
         }
 
@@ -130,6 +124,65 @@ namespace Assignment.Tests
             }
 
         
+        }
+
+        [TestMethod]
+        public void Test_GetAggregateListOfStatesGivenPeopleCollection()
+        {
+            // Arrange
+            SampleData data = new();
+            IEnumerable<IPerson> people = data.People;
+
+            // Act
+            data.GetAggregateListOfStatesGivenPeopleCollection(people);  
+            // Assert
+        }
+
+        [TestMethod]
+        public void ValidateEqualsOperatorReturnsTrue_AddressAndPerson()
+        {
+
+            Address addr1 = new("1", "2", "3", "4");
+            Address addr2 = new("1", "2", "3", "4");
+            Person p1 = new("A", "B", addr1, "C");
+            Person p2 = new("A", "B", addr2, "C");
+            Assert.IsTrue(addr1 == addr2);
+            Assert.IsTrue(p1 == p2);
+
+        }
+        [TestMethod]
+        public void ValidateEqualsOperatorReturnsFalse_Person()
+        {
+            Address addr1 = new("1", "2", "3", "4");
+            Address addr2 = new("1", "2", "3", "4");
+            Person p1 = new("A", "", addr1, "C");
+            Person p2 = new("A", "", addr2, "");
+            Assert.IsTrue(addr1 == addr2);
+            Assert.IsFalse(p1 == p2);
+
+
+        }
+        [TestMethod]
+        public void ValidateNotEqualsOperatorReturnsTrue_Person()
+        {
+            Address addr1 = new("1", "2", "3", "4");
+            Address addr2 = new("1", "2", "3", "4");
+            Person p1 = new("A", "", addr1, "C");
+            Person p2 = new("A", "", addr2, "");
+            Assert.IsTrue(addr1 == addr2);
+            Assert.IsTrue(p1 != p2);
+
+        }
+        [TestMethod]
+        public void ValidateNotEqualsOperatorReturnsFalse_Address()
+        {
+            Address addr1 = new("1", "2", "3", "4");
+            Address addr2 = new("1", "2", "3", "4");
+            Person p1 = new("A", "", addr1, "C");
+            Person p2 = new("A", "", addr2, "");
+            Assert.IsFalse(addr1 != addr2);
+            Assert.IsTrue(p1 != p2);
+
         }
     }
 }
