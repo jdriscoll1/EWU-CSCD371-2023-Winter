@@ -94,5 +94,33 @@ namespace Assignment.Tests
             Assert.AreEqual<string>(expected.Address.City, actual.Address.City);
 
         }
+
+        private static bool ContainsE(string str) {
+            return str.Contains("e");
+        }
+
+        public void Test_FilterByEmail() {
+            // Arrange
+            Predicate<string> predicate = ContainsE;
+            SampleData data = new();
+            IEnumerable<IPerson> people = data.People;
+            List<Person> expected = new List<Person>();
+            foreach (Person person in people.Cast<Person>()) {
+                if (ContainsE(person.EmailAddress))
+                {
+                    expected.Add(person);
+                }
+                
+            }
+
+
+            // Act 
+            IEnumerable<(string FirstName, string LastName)> actual = data.FilterByEmailAddress(predicate);
+
+            // Assert
+            Assert.AreEqual<int>(actual.Count(), expected.Count());
+
+        
+        }
     }
 }
