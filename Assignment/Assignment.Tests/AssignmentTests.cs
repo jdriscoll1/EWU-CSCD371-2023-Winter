@@ -5,6 +5,8 @@ using System.IO;
 using Assignment;
 using System.Linq;
 using System.Transactions;
+using System.Globalization;
+using System.Xml.Linq;
 
 namespace Assignment.Tests
 {
@@ -95,30 +97,37 @@ namespace Assignment.Tests
 
         }
 
-        private static bool ContainsE(string str) {
-            return str.Contains("e");
+        private static bool ContainsDotGov(string str) {
+            return str.Contains(".gov");
         }
-
+        [TestMethod]
         public void Test_FilterByEmail() {
             // Arrange
-            Predicate<string> predicate = ContainsE;
+            Predicate<string> predicate = ContainsDotGov;
             SampleData data = new();
             IEnumerable<IPerson> people = data.People;
-            List<Person> expected = new List<Person>();
+            List<Person> expected = new();
             foreach (Person person in people.Cast<Person>()) {
-                if (ContainsE(person.EmailAddress))
+                if (predicate(person.EmailAddress))
                 {
                     expected.Add(person);
                 }
                 
             }
 
-
             // Act 
             IEnumerable<(string FirstName, string LastName)> actual = data.FilterByEmailAddress(predicate);
 
             // Assert
-            Assert.AreEqual<int>(actual.Count(), expected.Count());
+            Assert.AreEqual<int>(actual.Count(), expected.Count);
+
+            var expectedAndActual = actual.Zip(expected, (a, e) => new { Name = a, Person = e});
+            foreach (var curr in expectedAndActual) {
+                Assert.AreEqual<string>(curr.Person.FirstName, curr.Name.FirstName); 
+                Assert.AreEqual<string>(curr.Person.LastName, curr.Name.LastName);
+                Assert.IsTrue(predicate(curr.Person.EmailAddress));
+
+            }
 
         
         }
