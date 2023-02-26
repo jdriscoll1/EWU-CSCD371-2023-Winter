@@ -109,6 +109,8 @@ namespace Assignment.Tests
                 
             }
 
+            Assert.IsTrue(expected.All(person => predicate(person.EmailAddress)));
+
             // Act 
             IEnumerable<(string FirstName, string LastName)> actual = data.FilterByEmailAddress(predicate);
 
@@ -132,10 +134,17 @@ namespace Assignment.Tests
             // Arrange
             SampleData data = new();
             IEnumerable<IPerson> people = data.People;
+            string expected = new SampleData().GetAggregateSortedListOfStatesUsingCsvRows().ToString();
+
+
 
             // Act
-            data.GetAggregateListOfStatesGivenPeopleCollection(people);  
+            string actual = data.GetAggregateListOfStatesGivenPeopleCollection(people);
+
             // Assert
+            Assert.AreEqual<string>(expected, actual);
+
+
         }
 
         [TestMethod]
