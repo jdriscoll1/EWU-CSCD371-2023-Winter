@@ -274,10 +274,10 @@ namespace Assignment.Tests
             TestNode!.Append("4");
             TestNode!.Append("5");
 
-            Node<string> ExpectedNode = new("testString")
+            Node<string> ExpectedNode = new("myString")
             {
-                  "1",
-                  "2"
+                  "4",
+                  "5"
             };
  
             // Act

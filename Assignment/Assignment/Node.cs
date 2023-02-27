@@ -206,5 +206,17 @@ namespace Assignment
             } while (curr != this);
 
         }
+
+        public IEnumerable<TNodeType> ChildItems(int maximum) {
+  
+                Node<TNodeType> curr = this;
+
+                for (int i = 0; i < maximum && i < Count; i++) {
+                    yield return curr.Value!; 
+                    curr = curr.Next;   
+                }
+            }
+        
+        }
     }
-}
+
