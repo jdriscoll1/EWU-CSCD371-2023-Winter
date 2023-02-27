@@ -133,13 +133,12 @@ namespace Assignment.Tests
         {
             // Arrange
             SampleData data = new();
-            IEnumerable<IPerson> people = data.People;
             string expected = new SampleData().GetAggregateSortedListOfStatesUsingCsvRows().ToString();
 
 
 
             // Act
-            string actual = data.GetAggregateListOfStatesGivenPeopleCollection(people);
+            string actual = data.GetAggregateListOfStatesGivenPeopleCollection(data.People);
 
             // Assert
             Assert.AreEqual<string>(expected, actual);
