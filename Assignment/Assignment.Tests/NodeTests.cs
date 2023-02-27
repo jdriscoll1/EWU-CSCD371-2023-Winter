@@ -274,9 +274,19 @@ namespace Assignment.Tests
             TestNode!.Append("4");
             TestNode!.Append("5");
 
+            Node<string> ExpectedNode = new("testString")
+            {
+                  "1",
+                  "2"
+            };
+ 
             // Act
+            IEnumerable<string> subsetOfList = TestNode.ChildItems(3);
 
             // Assert
+            string expected = string.Join(",", ExpectedNode);
+            string actual = string.Join(",", subsetOfList); 
+            Assert.AreEqual<string>(expected, actual);
 
         }
 
@@ -288,8 +298,13 @@ namespace Assignment.Tests
             TestNode!.Append("2");
 
             // Act
+            IEnumerable<string> subsetOfList = TestNode.ChildItems(8);
+
 
             // Assert
+            string expected = string.Join(",", TestNode);
+            string actual = string.Join(",", subsetOfList);
+            Assert.AreEqual<string>(expected, actual);
 
 
         }
