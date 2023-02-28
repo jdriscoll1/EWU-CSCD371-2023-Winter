@@ -12,10 +12,11 @@ namespace Assignment
         public IAsyncEnumerable<string> CsvRows {
             get
             {
-                return null!; 
-                //var inputFile = File.ReadAllLines("People.csv");
-                //return new List<string>(inputFile).Skip(1);
+
+                return File.ReadAllLinesAsync("People.csv").Result.AsParallel().ToList();
+            
             }
+
         }
 
         public IAsyncEnumerable<IPerson> People => throw new NotImplementedException();
