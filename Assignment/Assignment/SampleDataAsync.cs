@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO; 
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,7 +9,14 @@ namespace Assignment
 {
     public class SampleDataAsync : IAsyncSampleData
     {
-        public IAsyncEnumerable<string> CsvRows => throw new NotImplementedException();
+        public IAsyncEnumerable<string> CsvRows {
+            get
+            {
+                return null!; 
+                //var inputFile = File.ReadAllLines("People.csv");
+                //return new List<string>(inputFile).Skip(1);
+            }
+        }
 
         public IAsyncEnumerable<IPerson> People => throw new NotImplementedException();
 

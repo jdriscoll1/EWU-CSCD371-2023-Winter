@@ -11,8 +11,7 @@ namespace Assignment
         // 1.
         public IEnumerable<string> CsvRows {
             get {
-                var inputFile = File.ReadAllLines("People.csv");
-                return new List<string>(inputFile).Skip(1);
+                return File.ReadAllLines("People.csv").ToList().Skip(1);
             }
         }
 
