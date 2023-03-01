@@ -13,20 +13,46 @@ namespace Assignment.Tests
 
 
         [TestMethod]
-        public void TestReadCSV()
+        public async Task TestReadCSV()
         {
             // Act
-            IAsyncEnumerable<string> csvRows = ((IAsyncSampleData)new SampleDataAsync()).CsvRows;
+            
+            // Make a new Async Sample Data Object 
+            SampleDataAsync sampleData = new(); 
+
+            // Obtain the CSV Rows 
+            IAsyncEnumerable<string> csvRows = sampleData.CsvRows;
+
+            // Get an Enumerator For the Rows 
             IAsyncEnumerator<string> csvEnumerator = csvRows.GetAsyncEnumerator();
             using StreamReader sr = new("People.csv");
-            string line;
+
+            // Count the Number of Lines
             _ = sr.ReadLine()!;
-            // Assert
-            while ((line = sr.ReadLine()!) != null && csvEnumerator.MoveNextAsync().Result)
+            
+            int i = 0; 
+            while(sr.ReadLine()!= null)
             {
-                Assert.AreEqual<string>(line, csvEnumerator.Current);
+                i++; 
+            }
+
+            Assert.AreEqual<int>(csvRows.CountAsync().Result, i);
+
+
+            // Check the all the lines are the same 
+            string line;
+
+            using StreamReader sr2 = new("People.csv");
+            _ = sr2.ReadLine()!;
+            // Assert
+            await foreach(var row in csvRows)
+            {
+                line = sr2.ReadLine()!; 
+                
+                Assert.AreEqual<string>(line, row);
 
             }
+            
         }
 
         [TestMethod]
