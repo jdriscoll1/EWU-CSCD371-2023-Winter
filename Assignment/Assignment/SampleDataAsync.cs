@@ -69,9 +69,17 @@ namespace Assignment
             throw new NotImplementedException(); 
         }
 
-        public IAsyncEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
+        public async IAsyncEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
         {
-            throw new NotImplementedException();
+            List<string> states = new();
+            await foreach (string row in CsvRows)
+            {
+                states.Add(row.Split(",")[6]);
+            }
+            await foreach(var x in states.Distinct().OrderBy(x => x).ToAsyncEnumerable<string>()) {
+                yield return x; 
+            }
+
         }
     }
 }
