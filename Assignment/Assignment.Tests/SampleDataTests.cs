@@ -57,12 +57,9 @@ namespace Assignment.Tests
         [TestMethod]
         public void TestGetUniqueSortedListOfStatesGivenCsvRows_AssertTrueIfStatesAreOrdered()
         {
-            // Act
             IEnumerable<string> uniqueSortedListOfStates = new SampleData().GetUniqueSortedListOfStatesGivenCsvRows();
-            _ = uniqueSortedListOfStates.Zip(uniqueSortedListOfStates.Skip(1), (curr, next) => String.Compare(curr, next) > 0).All(x => x);
-           // Assert
+            Assert.IsTrue(uniqueSortedListOfStates.Zip(uniqueSortedListOfStates.Skip(1), (curr, next) => string.Compare(curr, next) < 0).All(x => x));
             Assert.AreEqual<int>(27, uniqueSortedListOfStates.Count());
-
         }
 
         [TestMethod]

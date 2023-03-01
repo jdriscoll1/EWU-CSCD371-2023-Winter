@@ -51,8 +51,7 @@ namespace Assignment.Tests
         [TestMethod]
         public async Task Test_FilterByEmail()
         {
-            Assert.IsTrue(true);
-            
+         
             // Arrange
             Predicate<string> predicate = ContainsDotGov;
             SampleDataAsync data = new();
