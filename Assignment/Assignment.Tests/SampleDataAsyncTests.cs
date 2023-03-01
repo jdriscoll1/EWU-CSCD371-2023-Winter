@@ -117,8 +117,39 @@ namespace Assignment.Tests
         public void TestAsyncGetUniqueSortedListOfStatesGivenCsvRows_AssertTrueIfStatesAreOrdered()
         {
             IAsyncEnumerable<string> uniqueSortedListOfStates = new SampleDataAsync().GetUniqueSortedListOfStatesGivenCsvRows();
-            Assert.IsTrue(uniqueSortedListOfStates.Zip(uniqueSortedListOfStates.Skip(1), (curr, next) => string.Compare(curr, next) < 0).AllAsync(x => x).Result);
+            Assert.IsTrue(uniqueSortedListOfStates.Zip(
+                uniqueSortedListOfStates.Skip(1), (curr, next) => 
+                string.Compare(curr, next, StringComparison.Ordinal) < 0)
+                .AllAsync(x => x).Result);
+
             Assert.AreEqual<int>(27, uniqueSortedListOfStates.CountAsync().Result);
+        }
+
+        [TestMethod]
+        public void TestAsync_GetAggregateSortedListOfStatesUsingCsvRows()
+        {
+            // Arrange
+            string expected = "AL,AZ,CA,DC,FL,GA,IN,KS,LA,MD,MN,MO,MT,NC,NE,NH,NV,NY,OR,PA,SC,TN,TX,UT,VA,WA,WV";
+            // Act
+            string actual = new SampleDataAsync().GetAggregateSortedListOfStatesUsingCsvRows();
+            // Assert
+            Assert.AreEqual<string>(expected, actual);
+        }
+
+        [TestMethod]
+        public void TestAsync_GetAggregateListOfStatesGivenPeopleCollection()
+        {
+            // Arrange
+            SampleDataAsync data = new();
+            string expected = data.GetAggregateSortedListOfStatesUsingCsvRows();
+
+            // Act
+            string actual = data.GetAggregateListOfStatesGivenPeopleCollection(data.People);
+
+            // Assert
+            Assert.AreEqual<string>(expected, actual);
+
+
         }
 
     }

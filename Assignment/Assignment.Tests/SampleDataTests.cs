@@ -68,7 +68,7 @@ namespace Assignment.Tests
             // Arrange
             string expected = "AL,AZ,CA,DC,FL,GA,IN,KS,LA,MD,MN,MO,MT,NC,NE,NH,NV,NY,OR,PA,SC,TN,TX,UT,VA,WA,WV";
             // Act
-            string actual = new SampleData().GetAggregateSortedListOfStatesUsingCsvRows().ToString();
+            string actual = new SampleData().GetAggregateSortedListOfStatesUsingCsvRows();
             // Assert
             Assert.AreEqual<string>(expected, actual); 
         }
@@ -130,9 +130,7 @@ namespace Assignment.Tests
         {
             // Arrange
             SampleData data = new();
-            string expected = new SampleData().GetAggregateSortedListOfStatesUsingCsvRows().ToString();
-
-
+            string expected = data.GetAggregateSortedListOfStatesUsingCsvRows(); 
 
             // Act
             string actual = data.GetAggregateListOfStatesGivenPeopleCollection(data.People);

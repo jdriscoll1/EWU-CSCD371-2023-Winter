@@ -60,13 +60,21 @@ namespace Assignment
 
         public string GetAggregateListOfStatesGivenPeopleCollection(IAsyncEnumerable<IPerson> people)
         {
-            throw new NotImplementedException();
+            //string str = "";
+            string allStates = people.AggregateAsync("",
+                (result, curr) =>
+                    result += result.Contains(curr.Address.State) ? "" : curr.Address.State + ",").Result;
+
+            // Trim the last comma
+            return allStates[..(allStates.Length - 1)];
         }
 
         
         public string GetAggregateSortedListOfStatesUsingCsvRows()
         {
-            throw new NotImplementedException(); 
+            IAsyncEnumerable<string> states = GetUniqueSortedListOfStatesGivenCsvRows();
+            string[] statesArray = states.Select(x => x).ToArrayAsync().Result;
+            return string.Join(",", statesArray);
         }
 
         public async IAsyncEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
