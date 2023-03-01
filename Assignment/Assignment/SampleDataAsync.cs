@@ -9,14 +9,22 @@ namespace Assignment
 {
     public class SampleDataAsync : IAsyncSampleData
     {
-        public IAsyncEnumerable<string> CsvRows {
+        public static async IAsyncEnumerable<string> ReadFileIntoAsyncEnumerable()
+        {
+            using StreamReader reader = File.OpenText("People.csv");
+            reader.ReadLine(); 
+            while (!reader.EndOfStream)
+                yield return await reader.ReadLineAsync() ?? throw new ArgumentNullException("File Not Found");
+        }
+
+        public IAsyncEnumerable<string> CsvRows
+        {
             get
-            {
+            { 
+                return ReadFileIntoAsyncEnumerable(); 
+                
 
-                return File.ReadAllLinesAsync("People.csv").Result.AsParallel().ToList();
-            
             }
-
         }
 
         public IAsyncEnumerable<IPerson> People => throw new NotImplementedException();

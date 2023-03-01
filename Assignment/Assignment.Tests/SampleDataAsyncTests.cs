@@ -17,7 +17,7 @@ namespace Assignment.Tests
         public void TestReadCSV()
         {
             // Act
-            IAsyncEnumerable<string> csvRows = new SampleDataAsync().CsvRows;
+            IAsyncEnumerable<string> csvRows = ((IAsyncSampleData)new SampleDataAsync()).CsvRows;
             IAsyncEnumerator<string> csvEnumerator = csvRows.GetAsyncEnumerator();
             using StreamReader sr = new("People.csv");
             string line;
