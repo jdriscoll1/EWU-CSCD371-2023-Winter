@@ -9,7 +9,7 @@ namespace Assignment
 {
     public class SampleDataAsync : IAsyncSampleData
     {
-        public static async IAsyncEnumerable<string> ReadFileIntoAsyncEnumerable()
+        private static async IAsyncEnumerable<string> ReadFileIntoAsyncEnumerable()
         {
             using StreamReader reader = File.OpenText("People.csv");
             reader.ReadLine(); 
@@ -20,18 +20,42 @@ namespace Assignment
         public IAsyncEnumerable<string> CsvRows
         {
             get
-            { 
+            {
                 return ReadFileIntoAsyncEnumerable(); 
-                
-
             }
         }
+        private async IAsyncEnumerable<IPerson> GetPeople() {
 
-        public IAsyncEnumerable<IPerson> People => throw new NotImplementedException();
+
+            await foreach (string row in CsvRows)
+            {
+
+                string[] rowData = row.Split(",");
+
+                if (((rowData[1], rowData[2], rowData[3]) is (string firstName, string lastName, string email)) &&
+                     ((rowData[4], rowData[5], rowData[6], rowData[7]) is (string street, string city, string state, string zip)))
+                {
+                    Address newAddress = new(street, city, state, zip);
+                    Person newPerson = new(firstName, lastName, newAddress, email);
+                    yield return newPerson;
+                }
+            }
+       
+        }
+        public IAsyncEnumerable<IPerson> People {
+         
+                get {
+                    return GetPeople().OrderBy(person => person.Address.State).ThenBy(person => person.Address.City).ThenBy(person => person.Address.Zip);  
+                }
+            
+
+        }
 
         public IAsyncEnumerable<(string FirstName, string LastName)> FilterByEmailAddress(Predicate<string> filter)
         {
-            throw new NotImplementedException();
+            return People.Where(person => filter(person.EmailAddress)).Select(person => {
+              return (person.FirstName, person.LastName);
+          });
         }
 
         public string GetAggregateListOfStatesGivenPeopleCollection(IAsyncEnumerable<IPerson> people)

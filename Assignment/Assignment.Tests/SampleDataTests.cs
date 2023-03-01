@@ -11,7 +11,7 @@ using System.Xml.Linq;
 namespace Assignment.Tests
 {
     [TestClass]
-    public class AssignmentTests
+    public class SampleDataTests
     {
 
         [TestMethod]
