@@ -87,5 +87,13 @@ namespace Assignment.Tests
 
         }
 
+        [TestMethod]
+        public void TestAsyncGetUniqueSortedListOfStatesGivenCsvRows_AssertTrueIfStatesAreOrdered()
+        {
+            IAsyncEnumerable<string> uniqueSortedListOfStates = new SampleDataAsync().GetUniqueSortedListOfStatesGivenCsvRows();
+            Assert.IsTrue(uniqueSortedListOfStates.Zip(uniqueSortedListOfStates.Skip(1), (curr, next) => string.Compare(curr, next) < 0).AllAsync(x => x).Result);
+            Assert.AreEqual<int>(27, uniqueSortedListOfStates.CountAsync().Result);
+        }
+
     }
 }
