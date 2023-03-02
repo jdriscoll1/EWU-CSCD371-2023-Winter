@@ -12,7 +12,7 @@ namespace Assignment
         // 1.
         public IEnumerable<string> CsvRows {
             get {
-                return File.ReadAllLines("People.csv").ToList().Skip(1); 
+                return File.ReadAllLines("../../../../Assignment/People.csv").ToList().Skip(1); 
 
             }
         }
