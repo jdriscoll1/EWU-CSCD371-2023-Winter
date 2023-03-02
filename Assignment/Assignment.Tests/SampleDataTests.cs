@@ -91,6 +91,7 @@ namespace Assignment.Tests
         private static bool ContainsDotGov(string str) {
             return str.Contains(".gov");
         }
+
         [TestMethod]
         public void Test_FilterByEmail() {
             // Arrange
@@ -115,6 +116,7 @@ namespace Assignment.Tests
             Assert.AreEqual<int>(actual.Count(), expected.Count);
 
             var expectedAndActual = actual.Zip(expected, (a, e) => new { Name = a, Person = e});
+            
             foreach (var curr in expectedAndActual) {
                 Assert.AreEqual<string>(curr.Person.FirstName, curr.Name.FirstName); 
                 Assert.AreEqual<string>(curr.Person.LastName, curr.Name.LastName);
@@ -130,6 +132,8 @@ namespace Assignment.Tests
         {
             // Arrange
             SampleData data = new();
+
+            // This function calls the GivenCsvRows function
             string expected = data.GetAggregateSortedListOfStatesUsingCsvRows(); 
 
             // Act

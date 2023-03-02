@@ -33,7 +33,7 @@ namespace Assignment
         // 3.
         public string GetAggregateSortedListOfStatesUsingCsvRows() {
             IEnumerable<string> states = GetUniqueSortedListOfStatesGivenCsvRows();
-            string[] statesArray = states.Select(x => x).ToArray();
+            string[] statesArray = states.ToArray();
             return string.Join(",", statesArray);
         }
 

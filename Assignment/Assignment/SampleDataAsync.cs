@@ -73,7 +73,7 @@ namespace Assignment
         public string GetAggregateSortedListOfStatesUsingCsvRows()
         {
             IAsyncEnumerable<string> states = GetUniqueSortedListOfStatesGivenCsvRows();
-            string[] statesArray = states.Select(x => x).ToArrayAsync().Result;
+            string[] statesArray = states.ToArrayAsync().Result;
             return string.Join(",", statesArray);
         }
 
