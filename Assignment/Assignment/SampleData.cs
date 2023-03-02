@@ -53,13 +53,12 @@ namespace Assignment
         public IEnumerable<(string FirstName, string LastName)> FilterByEmailAddress(
             Predicate<string> filter)
         {
-            return (IEnumerable<(string FirstName, string LastName)>)
-                People.Where(person => filter(person.EmailAddress)).Select(item => new { item.FirstName, item.LastName });
-            
+
+            return People.Where(person => filter(person.EmailAddress)).Select(item => { return (item.FirstName, item.LastName); });
         }
 
         // 6.
-        /*public string GetAggregateListOfStatesGivenPeopleCollection(
+        public string GetAggregateListOfStatesGivenPeopleCollection(
             IEnumerable<IPerson> people)
         {
             List<string> states = new List<string>();
@@ -67,8 +66,11 @@ namespace Assignment
             {
                 states.Add(person.Address.State);
             }
-            string agg = states.Aggregate("", (state, next) => states.Contains());
-            return;
-        }*/
+
+            IEnumerable<string> distinctstates = states.Distinct();
+            string agg = distinctstates.Aggregate((i, j) => i + "," + j);
+
+            return agg;
+        }
     }
 }

@@ -57,13 +57,39 @@ namespace Assignment.Tests
         {
             SampleData sampleData = new();
             var ppl = sampleData.People;
-            //_ = ppl.Zip(ppl.Skip(1), (curr, next) => (curr > next).All(x => x);
 
-            //string frstPersn = sampleData.CsvRows.First().Split(",")[1];
             Assert.AreEqual<string>(ppl.First().Address.State, "AL");
             Assert.AreEqual<string>(ppl.First().Address.City, "Mobile");
             Assert.AreEqual<string>(ppl.First().Address.Zip, "37308");
 
+        }
+
+        static bool fromGoogle(string email) 
+        {
+            string google = "google";
+            return email.Contains(google);
+        }
+
+
+        [TestMethod]
+        public void test_FilterByEmailAddress()
+        {
+            SampleData sampleData = new();
+            Predicate<string> predicate = fromGoogle;
+            IEnumerable<(string FirstName, string LastName)> result = sampleData.FilterByEmailAddress(predicate);
+            Assert.AreEqual<(string FirstName, string LastName)>(result.Single(), ("Molly", "Jeannot"));
+        }
+
+        [TestMethod]
+        public void test_GetAggregateListOfStatesGivenPeopleCollection()
+        {
+            SampleData sampleData = new();
+            IEnumerable<string> expected = sampleData.GetUniqueSortedListOfStatesGivenCsvRows(); //< got this wrong in other, kinda
+            string[] statesArray = expected.Select(item => item).ToArray();
+            string expect = string.Join(",", statesArray);
+
+            string actual = sampleData.GetAggregateListOfStatesGivenPeopleCollection(sampleData.People);
+            Assert.AreEqual(expect, actual);
         }
     }
 }
