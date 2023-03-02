@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Assignment
 {
@@ -50,10 +51,24 @@ namespace Assignment
 
         // 5.
         public IEnumerable<(string FirstName, string LastName)> FilterByEmailAddress(
-            Predicate<string> filter) => throw new NotImplementedException();
+            Predicate<string> filter)
+        {
+            return (IEnumerable<(string FirstName, string LastName)>)
+                People.Where(person => filter(person.EmailAddress)).Select(item => new { item.FirstName, item.LastName });
+            
+        }
 
         // 6.
-        public string GetAggregateListOfStatesGivenPeopleCollection(
-            IEnumerable<IPerson> people) => throw new NotImplementedException();
+        /*public string GetAggregateListOfStatesGivenPeopleCollection(
+            IEnumerable<IPerson> people)
+        {
+            List<string> states = new List<string>();
+            foreach (IPerson person in people)
+            {
+                states.Add(person.Address.State);
+            }
+            string agg = states.Aggregate("", (state, next) => states.Contains());
+            return;
+        }*/
     }
 }
