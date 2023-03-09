@@ -20,7 +20,8 @@ namespace Assignment.Tests
             // Act
             IEnumerable<string> csvRows = new SampleData().CsvRows;
             IEnumerator<string> csvEnumerator = csvRows.GetEnumerator();
-            using StreamReader sr = new(".. / .. / .. / .. / Assignment / People.csv");
+
+            using StreamReader sr = new("../../../../Assignment/People.csv");
             string line;
             _ = sr.ReadLine()!;
 
