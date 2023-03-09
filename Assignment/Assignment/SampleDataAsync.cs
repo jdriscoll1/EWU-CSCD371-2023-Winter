@@ -9,7 +9,7 @@ namespace Assignment
     {
         private static async IAsyncEnumerable<string> ReadFileIntoAsyncEnumerable()
         {
-            using StreamReader reader = File.OpenText("People.csv");
+            using StreamReader reader = File.OpenText("../../../../Assignment/People.csv");
             reader.ReadLine(); 
             while (!reader.EndOfStream)
                 yield return await reader.ReadLineAsync() ?? throw new ArgumentNullException("File Not Found");
