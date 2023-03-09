@@ -25,7 +25,7 @@ namespace Assignment.Tests
 
             // Get an Enumerator For the Rows 
             IAsyncEnumerator<string> csvEnumerator = csvRows.GetAsyncEnumerator();
-            using StreamReader sr = new("People.csv");
+            using StreamReader sr = new("../../../../Assignment/People.csv");
 
             // Count the Number of Lines
             _ = sr.ReadLine()!;
@@ -42,7 +42,7 @@ namespace Assignment.Tests
             // Check the all the lines are the same 
             string line;
 
-            using StreamReader sr2 = new("People.csv");
+            using StreamReader sr2 = new("../../../../Assignment/People.csv");
             _ = sr2.ReadLine()!;
             // Assert
             await foreach(var row in csvRows)
