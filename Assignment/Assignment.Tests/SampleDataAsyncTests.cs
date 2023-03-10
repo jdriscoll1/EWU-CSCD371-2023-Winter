@@ -13,7 +13,7 @@ namespace Assignment.Tests
 
 
         [TestMethod]
-        public async Task TestReadCSV()
+        public async Task TestReadCSV_ReturnTrueIfMatchesStreamReadersValues()
         {
             // Act
             
@@ -56,7 +56,7 @@ namespace Assignment.Tests
         }
 
         [TestMethod]
-        public void Test_PersonObject()
+        public void Test_PersonObject_ReturnTrueIfMatchesHardcodedValue()
         {
             // Arrange
             Person expected = new("Arthur", "Myles", new Address("4718 Thackeray Pass", "Mobile", "AL", "37308"), "amyles1c@miibeian.gov.cn");
@@ -75,7 +75,7 @@ namespace Assignment.Tests
         }
 
         [TestMethod]
-        public async Task Test_FilterByEmail()
+        public async Task Test_FilterByEmail_ReturnTrueIfMatchesList()
         {
          
             // Arrange
@@ -137,7 +137,7 @@ namespace Assignment.Tests
         }
 
         [TestMethod]
-        public void TestAsync_GetAggregateListOfStatesGivenPeopleCollection()
+        public void TestAsync_GetAggregateListOfStatesGivenPeopleCollection_ReturnTrueIfMatchesCsvRows()
         {
             // Arrange
             SampleDataAsync data = new();

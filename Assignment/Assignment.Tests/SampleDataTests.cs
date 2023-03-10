@@ -15,7 +15,7 @@ namespace Assignment.Tests
     {
 
         [TestMethod]
-        public void TestReadCSV()
+        public void TestReadCSV_ReturnTrueCSVRowsMethodMatchesReadInString()
         {
             // Act
             IEnumerable<string> csvRows = new SampleData().CsvRows;
@@ -34,7 +34,7 @@ namespace Assignment.Tests
         }
 
         [TestMethod]
-        public void ValidateUnique_UsingHardcodedListOfSpokaneAddresses()
+        public void ValidateUnique_UsingHardcodedListOfSpokaneAddresses_ReturnTrueIfMatchesHardcodedExample()
         {          
             // Arrange
             List<Address> listOfAddresses = new() {
@@ -64,7 +64,7 @@ namespace Assignment.Tests
         }
 
         [TestMethod]
-        public void Test_GetAggregateSortedListOfStatesUsingCsvRows()
+        public void Test_GetAggregateSortedListOfStatesUsingCsvRows_ReturnTrueIfMatchesHardcodedListofStrings()
         {
             // Arrange
             string expected = "AL,AZ,CA,DC,FL,GA,IN,KS,LA,MD,MN,MO,MT,NC,NE,NH,NV,NY,OR,PA,SC,TN,TX,UT,VA,WA,WV";
@@ -75,7 +75,7 @@ namespace Assignment.Tests
         }
 
         [TestMethod]
-        public void Test_PersonObject()
+        public void Test_PersonObject_ReturnTrueIfFirstPersonMatchesHardcodedPerson()
         {
             // Arrange
             //49,Arthur,Myles,amyles1c@miibeian.gov.cn,4718 Thackeray Pass,Mobile,AL,37308
@@ -94,7 +94,7 @@ namespace Assignment.Tests
         }
 
         [TestMethod]
-        public void Test_FilterByEmail() {
+        public void Test_FilterByEmail_ReturnsTrueIfMatchesReadInExampleDataSet() {
             // Arrange
             Predicate<string> predicate = ContainsDotGov;
             SampleData data = new();
@@ -129,7 +129,7 @@ namespace Assignment.Tests
         }
 
         [TestMethod]
-        public void Test_GetAggregateListOfStatesGivenPeopleCollection()
+        public void Test_GetAggregateListOfStatesGivenPeopleCollectionReturnTrueIfMatchesCSVVariant()
         {
             // Arrange
             SampleData data = new();
