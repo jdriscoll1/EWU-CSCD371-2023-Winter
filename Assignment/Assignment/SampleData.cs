@@ -31,18 +31,15 @@ namespace Assignment
 
 
         // 3.
-        public string GetAggregateSortedListOfStatesUsingCsvRows() {
-            IEnumerable<string> states = GetUniqueSortedListOfStatesGivenCsvRows();
-            string[] statesArray = states.ToArray();
-            return string.Join(",", statesArray);
-        }
+        public string GetAggregateSortedListOfStatesUsingCsvRows() => 
+            string.Join(",", GetUniqueSortedListOfStatesGivenCsvRows().ToArray());
+           
 
         // 4.
         public IEnumerable<IPerson> People
         {
             get {
                 List<IPerson> people = new();
-
                 foreach (string row in CsvRows)
                 {
 
