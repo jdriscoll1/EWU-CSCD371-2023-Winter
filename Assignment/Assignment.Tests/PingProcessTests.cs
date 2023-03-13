@@ -89,6 +89,8 @@ public class PingProcessTests
 
 
     [TestMethod]
+    [ExpectedException(typeof(AggregateException))]
+
     public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrapping()
     {
         // Arrange
@@ -104,10 +106,7 @@ public class PingProcessTests
             
         }
         catch (AggregateException ex) {
-            exception = ex;
-            if (ex.InnerException is not null) {
-                Assert.IsInstanceOfType(ex.InnerException, typeof(TaskCanceledException));
-            }
+            throw ex; 
             
         }
         Assert.IsNotNull(exception); 
@@ -118,7 +117,27 @@ public class PingProcessTests
     [ExpectedException(typeof(TaskCanceledException))]
     public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrappingTaskCanceledException()
     {
-        // Use exception.Flatten()
+        // Arrange
+        CancellationTokenSource cancellationTokenSource = new();
+        CancellationToken cancellationToken = cancellationTokenSource.Token;
+        string hostname = "flwg.link";
+        cancellationTokenSource.Cancel();
+        // Act 
+        try
+        {
+            _ = Sut.RunAsync(hostname, cancellationToken).Result;
+
+        }
+        catch (AggregateException ex)
+        {
+            foreach (Exception e in ex.InnerExceptions) {
+                throw e; 
+            } 
+            
+            
+
+        }
+  
     }
 
     [TestMethod]

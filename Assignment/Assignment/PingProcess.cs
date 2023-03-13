@@ -48,7 +48,9 @@ public class PingProcess
         return await Task.Run(() =>
         {
 
-            cancellationToken.ThrowIfCancellationRequested();
+            if (cancellationToken.IsCancellationRequested) {
+                throw new TaskCanceledException(); 
+            } 
             
             return new PingResult(process.ExitCode, stringBuilder?.ToString());
 
