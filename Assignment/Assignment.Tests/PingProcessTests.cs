@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Assignment.Tests;
@@ -88,10 +89,29 @@ public class PingProcessTests
 
 
     [TestMethod]
-    [ExpectedException(typeof(AggregateException))]
     public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrapping()
     {
-        
+        // Arrange
+        CancellationTokenSource cancellationTokenSource = new();
+        CancellationToken cancellationToken = cancellationTokenSource.Token;
+        string hostname = "flwg.link";
+        AggregateException exception = null!; 
+        cancellationTokenSource.Cancel();
+        // Act 
+        try
+        {
+            _ = Sut.RunAsync(hostname, cancellationToken).Result;
+            
+        }
+        catch (AggregateException ex) {
+            exception = ex;
+            if (ex.InnerException is not null) {
+                Assert.IsInstanceOfType(ex.InnerException, typeof(TaskCanceledException));
+            }
+            
+        }
+        Assert.IsNotNull(exception); 
+
     }
 
     [TestMethod]
