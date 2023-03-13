@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -57,8 +58,36 @@ public class PingProcess
 
         }); 
       }
+    async public Task<PingResult> RunAsync(IEnumerable<string> hostNameOrAddresses, CancellationToken cancellationToken = default) {
+        StringBuilder? stringBuilder = null;
+        ParallelQuery<Task<int>>? all = hostNameOrAddresses.AsParallel().Select(async item =>
+        {
+            StartInfo.Arguments = item;
+            void updateStdOutput(string? line) =>
+                (stringBuilder ??= new StringBuilder()).AppendLine(line);
+            Process process = RunProcessInternal(StartInfo, updateStdOutput, default, default);
 
-    
+            Task<PingResult> task = Task.Run(() => {
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    throw new TaskCanceledException();
+                }
+                return new PingResult(process.ExitCode, stringBuilder?.ToString()); 
+            
+            }); 
+
+            await task.WaitAsync(default(CancellationToken));
+            return task.Result.ExitCode;
+        });
+
+        await Task.WhenAll(all);
+
+        int total = all.Aggregate(0, (total, item) => total + item.Result);
+        return new(total, stringBuilder?.ToString());
+
+    }
+
+
 
     async public Task<PingResult> RunAsync(params string[] hostNameOrAddresses)
     {

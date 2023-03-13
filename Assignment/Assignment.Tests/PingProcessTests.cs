@@ -1,4 +1,5 @@
 ﻿using IntelliTect.TestTools;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -159,7 +160,27 @@ public class PingProcessTests
         // Test Sut.RunLongRunningAsync("localhost");
         AssertValidPingOutput(result);
     }
-#pragma warning restore CS1998 // Remove this
+
+    [TestMethod]
+    public void TestPingingListOfAddressesWithCancellationTokenInParallel()
+    {
+        // Arrange
+        List<string> hostNameOrAddresses = new() {
+            "localhost",
+            "localhost",
+            "localhost"
+        };
+
+        CancellationTokenSource cancellationTokenSource = new();
+        CancellationToken cancellationToken = cancellationTokenSource.Token; 
+        // Act
+        PingResult result = Sut.RunAsync(hostNameOrAddresses, cancellationToken).Result;
+
+        //Assert 
+        AssertValidPingOutput(result);
+
+
+    }
 
     [TestMethod]
     public void StringBuilderAppendLine_InParallel_IsNotThreadSafe()
