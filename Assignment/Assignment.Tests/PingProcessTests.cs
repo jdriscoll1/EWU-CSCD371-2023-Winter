@@ -86,8 +86,6 @@ public class PingProcessTests
         // Test Sut.RunAsync("localhost");
         AssertValidPingOutput(result);
     }
-#pragma warning restore CS1998 // Remove this
-
 
     [TestMethod]
     [ExpectedException(typeof(AggregateException))]
@@ -189,9 +187,16 @@ public class PingProcessTests
     {
         IEnumerable<int> numbers = Enumerable.Range(0, short.MaxValue);
         System.Text.StringBuilder stringBuilder = new();
-        numbers.AsParallel().ForAll(item => stringBuilder.AppendLine(""));
+        object locker = new();
+        numbers.AsParallel().ForAll(item =>
+        {
+            lock (locker)
+            {
+                stringBuilder.AppendLine("");
+            }
+        });
         int lineCount = stringBuilder.ToString().Split(Environment.NewLine).Length;
-        Assert.AreNotEqual(lineCount, numbers.Count()+1);
+        Assert.AreEqual<int>(lineCount, numbers.Count()+1);
     }
 
     readonly string PingOutputLikeExpression = @"

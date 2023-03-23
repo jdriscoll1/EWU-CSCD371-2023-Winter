@@ -46,15 +46,10 @@ public class PingProcess
         void updateStdOutput(string? line) =>
             (stringBuilder ??= new StringBuilder()).AppendLine(line);
         Process process = RunProcessInternal(StartInfo, updateStdOutput, default, default);
+        cancellationToken.ThrowIfCancellationRequested(); 
         return await Task.Run(() =>
         {
-
-            if (cancellationToken.IsCancellationRequested) {
-                throw new TaskCanceledException(); 
-            } 
-            
             return new PingResult(process.ExitCode, stringBuilder?.ToString());
-
 
         }); 
       }
@@ -80,10 +75,6 @@ public class PingProcess
         return new PingResult(total, str?.ToString().Trim());
 
     }
-
-
- 
-
 
     async public Task<PingResult> RunAsync(params string[] hostNameOrAddresses)
     {
